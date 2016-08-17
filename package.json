@@ -1,0 +1,40 @@
+{
+  "name": "discoverit",
+  "version": "1.0.0",
+  "description": "An app to promote learning and physical fitness.",
+  "main": "public/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robertprine2/DiscoverIt"
+  },
+  "author": "Robert Prine",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robertprine2/DiscoverIt/issues"
+  },
+  "homepage": "https://github.com/robertprine2/DiscoverIt#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-session": "^1.14.0",
+    "axios": "^0.12.0",
+    "core-js": "^2.4.0",
+    "mongojs": "^2.3.0",
+    "morgan": "^1.7.0",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.3.13",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "webpack": "^1.13.1"
+  },
+  "engines": {
+    "node": "4.4.5"
+  }
+}
