@@ -32,19 +32,36 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 
-db.users.insert({
-	"avatar": "http://test.com",
-	"userName": "Joe Shmo",
-	"email": "joe@email.com",
-	"discoveries": 0,
-	"edits": 0,
-	"confirms": 0
-})
+//testing MongoDB
+// db.users.insert({
+// 	"avatar": "http://test.com",
+// 	"userName": "Joe Shmo",
+// 	"email": "joe@email.com",
+// 	"discoveries": 0,
+// 	"edits": 0,
+// 	"confirms": 0
+// });
 
 //******************************************************
 
-//require routes
-require('./routing/html-routes.js')(app);
+app.get('/', function(req, res) {
+	res.sendFile('./public/index.html');
+});
+
+
+//how do I add their ID to the URL ?id or something?
+app.get('/profile', function(req, res) {
+	var user = req.body.resp;
+	console.log(user);
+	res.sendFile('./public/profile.html')
+});
+
+app.get('/api/', function(req, res) {
+	db.users.find({}, function(err, doc) {
+		if (err) throw err;
+		res.send(doc);
+	})
+})
 
 //******************************************************
 
