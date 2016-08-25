@@ -3,6 +3,38 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var expressSessions = require('express-session');
 var logger = require('morgan');
+var passport = require('passport');
+
+// Google oauth2 login, key, and secrets
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
+var configAuth = require('./auth');
+
+// OAuth 2.0-based strategies require a `verify` function which receives the
+// credential (`accessToken`) for accessing the Facebook API on the user's
+// behalf, along with the user's profile.  The function must invoke `cb`
+// with a user object, which will be set at `req.user` in route handlers after
+// authentication.
+passport.use(new GoogleStrategy(configAuth.googleAuth,
+  function(accessToken, refreshToken, profile, cb) {
+    console.log('access token is', accessToken)
+   
+    return cb(null, profile);
+  }));
+
+// Configure Passport authenticated session persistence.
+//
+// In order to restore authentication state across HTTP requests, Passport needs
+// to serialize users into and deserialize users out of the session.  In a
+// production-quality application, this would typically be as simple as
+// supplying the user ID when serializing, and querying the user record by ID
+// from the database when deserializing.  
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
 
 //requiring and setting up mongo database/collections
 var mongojs = require('mongojs');
@@ -19,20 +51,33 @@ db.on('error', function(err) {
 
 // creating an instance of express
 var app = express();
+
 // assigning the port or using the PORT environment variable
 var PORT = process.env.PORT || 3000; 
 
 // makes static content in assets accessible
-app.use(express.static(process.cwd() + '/public'));	
+app.use(express.static(__dirname + '/public'));	
 
-// BodyParser interprets data sent to the server
+//**** NOT SURE IF I NEED THESE WITH THE ONES BELOW
+// // BodyParser interprets data sent to the server
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 
-//testing MongoDB
+// Use application-level middleware for common functionality, including
+// logging, parsing, and session handling.
+app.use(require('morgan')('combined'));
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+
+// Initialize Passport and restore authentication state, if any, from the
+// session.
+app.use(passport.initialize());
+app.use(passport.session());
+
+//testing MongoDB ******
 // db.users.insert({
 // 	"avatar": "http://test.com",
 // 	"userName": "Joe Shmo",
@@ -44,24 +89,37 @@ app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 
 //******************************************************
 
-app.get('/', function(req, res) {
-	res.sendFile('./public/index.html');
-});
+// Define routes.
+app.get('/',  function(req, res) {
+  console.log("/: " + req.body);
+    res.sendFile(__dirname + '/public/views/index.html');
+  });
+
+app.get('/login',
+  function(req, res){
+    console.log("login: " + req.body.user);
+    res.sendFile(__dirname + '/public/views/login.html');
+  });
+
+app.get('/login/google',
+  passport.authenticate('google', {scope: 'https://www.googleapis.com/auth/plus.login'}));
+
+app.get('/login/google/return', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    console.log("login/google/return: " + req.body.user);
+    res.redirect('/profile');
+  });
+
+app.get('/profile',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res){
+    console.log("profile: " + req.body.user)
+    res.sendFile(__dirname + '/public/views/profile.html');
+    res.send({ user: req.user });
+  });
 
 
-//how do I add their ID to the URL ?id or something?
-app.get('/profile', function(req, res) {
-	var user = req.body.resp;
-	console.log(user);
-	res.sendFile('./public/profile.html')
-});
-
-app.get('/api/', function(req, res) {
-	db.users.find({}, function(err, doc) {
-		if (err) throw err;
-		res.send(doc);
-	})
-})
 
 //******************************************************
 

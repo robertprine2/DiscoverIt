@@ -16,20 +16,21 @@
 <!--Goes in button? - 460518588706-sadkmj81kl3inqhgotjck2t19c0e6vtu.apps.googleusercontent.com-->
 
 	<!-- Container with the Sign-In button. -->
-    <div id="gConnect" class="button">
+	<a href="/login/google">Log In with Google</a>
+    <!-- <div id="gConnect" class="button">
       <button class="g-signin"
           data-scope="email"
 
-          data-clientid="460518588706-sadkmj81kl3inqhgotjck2t19c0e6vtu.apps.googleusercontent.com"
-          data-callback="onSignInCallback"
+          data-clientid="794016409691-23utaecc07q7fi18ef8uuhmfava3sjlr.apps.googleusercontent.com"
+          data-callback="http://localhost:3000/profile"
           data-theme="dark"
           data-cookiepolicy="single_host_origin">
-      </button>
-      <!-- Textarea for outputting data -->
+      </button> -->
+      <!-- Textarea for outputting data
       <div id="response" class="hide">
         <textarea id="responseContainer" style="width:100%; height:150px"></textarea>
       </div>
-    </div>
+    </div> -->
 
 	<!--Footer Stuff-->
 
@@ -90,7 +91,7 @@
 
 	</script> -->
 </body>
-	<script>
+	<!-- <script>
 	  /**
 	   * Handler for the signin callback triggered after the user selects an account.
 	   */
@@ -124,5 +125,5 @@
 	        primaryEmail + '\n\nFull Response:\n' + JSON.stringify(resp);
 	  }
 
-	  </script>
+	  </script> -->
 </html>

@@ -18,11 +18,16 @@
   "homepage": "https://github.com/robertprine2/DiscoverIt#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "core-js": "^2.4.0",
     "express": "^4.14.0",
     "express-session": "^1.14.0",
-    "core-js": "^2.4.0",
+    "googleapis": "^12.4.0",
     "mongojs": "^2.3.0",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-google-oauth20": "^1.0.0"
   },
   "engines": {
     "node": "4.4.5"
