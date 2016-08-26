@@ -13,24 +13,17 @@
 
  	<!--Navbar stuff-->
 
-<!--Goes in button? - 460518588706-sadkmj81kl3inqhgotjck2t19c0e6vtu.apps.googleusercontent.com-->
+	
+	<div class="container" ng-app="app">
 
-	<!-- Container with the Sign-In button. -->
-	<a href="/login/google">Log In with Google</a>
-    <!-- <div id="gConnect" class="button">
-      <button class="g-signin"
-          data-scope="email"
+    	<header ng-include="'views/nav.html'"></header>
+    	<!-- Container with the Sign-In button. -->
+		<a href="/login/google">Log In with Google</a>
+		<div ui-view></div>
 
-          data-clientid="794016409691-23utaecc07q7fi18ef8uuhmfava3sjlr.apps.googleusercontent.com"
-          data-callback="http://localhost:3000/profile"
-          data-theme="dark"
-          data-cookiepolicy="single_host_origin">
-      </button> -->
-      <!-- Textarea for outputting data
-      <div id="response" class="hide">
-        <textarea id="responseContainer" style="width:100%; height:150px"></textarea>
-      </div>
-    </div> -->
+		<footer ng-include="'views/footer.html'"></footer>
+
+	</div>
 
 	<!--Footer Stuff-->
 
@@ -49,81 +42,12 @@
 	<!-- All of our JS code will be transpiled into this bundle.js file -->
 	<script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-	<script type="text/javascript" src="app.js"></script>
-<!-- 	<script>
-		function onSuccess(googleUser) {
-		    var profile = googleUser.getBasicProfile();
-		    gapi.client.load('plus', 'v1', function () {
-		        var request = gapi.client.plus.people.get({
-		            'userId': 'me'
-		        });
-		        //Display the user details
-		        request.execute(function (resp) {
-		            var profileHTML = '<div class="profile"><div class="head">Welcome '+resp.name.givenName+'! <a href="javascript:void(0);" onclick="signOut();">Sign out</a></div>';
-		            profileHTML += '<img src="'+resp.image.url+'"/><div class="proDetails"><p>'+resp.displayName+'</p><p>'+resp.emails[0].value+'</p><p>'+resp.gender+'</p><p>'+resp.id+'</p><p><a href="'+resp.url+'">View Google+ Profile</a></p></div></div>';
-		            console.log(profileHTML);
-		            $('.userContent').html(profileHTML);
-		            $('#gSignIn').slideUp('slow');
-		        });
-		    });
-		}
-		function onFailure(error) {
-		    alert(error);
-		}
-		function renderButton() {
-		    gapi.signin2.render('gSignIn', {
-		        'scope': 'profile email',
-		        'width': 240,
-		        'height': 50,
-		        'longtitle': true,
-		        'theme': 'dark',
-		        'onsuccess': onSuccess,
-		        'onfailure': onFailure
-		    });
-		}
-		function signOut() {
-		    var auth2 = gapi.auth2.getAuthInstance();
-		    auth2.signOut().then(function () {
-		        $('.userContent').html('');
-		        $('#gSignIn').slideDown('slow');
-		    });
-		}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
 
-	</script> -->
+	<script src="scripts/app.js"></script>
+	<script src="scripts/controllers/profileCtrl.js"></script>
+	<script src="scripts/controllers/discoverCtrl.js"></script>
+	<script src="scripts/controllers/findCtrl.js"></script>
+
 </body>
-	<!-- <script>
-	  /**
-	   * Handler for the signin callback triggered after the user selects an account.
-	   */
-	  function onSignInCallback(resp) {
-	    gapi.client.load('plus', 'v1', apiClientLoaded);
-	  }
-
-	  /**
-	   * Sets up an API call after the Google API client loads.
-	   */
-	  function apiClientLoaded() {
-	    gapi.client.plus.people.get({userId: 'me'}).execute(handleEmailResponse);
-	  }
-
-	  /**
-	   * Response callback for when the API client receives a response.
-	   *
-	   * @param resp The API response object with the user email and profile information.
-	   */
-	  function handleEmailResponse(resp) {
-
-	  	console.log(resp);
-
-	  	
-
-	    var primaryEmail;
-	    for (var i=0; i < resp.emails.length; i++) {
-	      if (resp.emails[i].type === 'account') primaryEmail = resp.emails[i].value;
-	    }
-	    document.getElementById('responseContainer').value = 'Primary email: ' +
-	        primaryEmail + '\n\nFull Response:\n' + JSON.stringify(resp);
-	  }
-
-	  </script> -->
 </html>

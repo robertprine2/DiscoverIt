@@ -91,31 +91,31 @@ app.use(passport.session());
 
 // Define routes.
 app.get('/',  function(req, res) {
-  console.log("/: " + req.body);
+  
     res.sendFile(__dirname + '/public/views/index.html');
   });
 
 app.get('/login',
   function(req, res){
-    console.log("login: " + req.body.user);
+    
     res.sendFile(__dirname + '/public/views/login.html');
   });
 
 app.get('/login/google',
-  passport.authenticate('google', {scope: 'https://www.googleapis.com/auth/plus.login'}));
+  passport.authenticate('google', {scope: 'profile'}));
 
 app.get('/login/google/return', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    console.log("login/google/return: " + req.body.user);
+    
     res.redirect('/profile');
   });
 
 app.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
-    console.log("profile: " + req.body.user)
-    res.sendFile(__dirname + '/public/views/profile.html');
+    
+   
     res.send({ user: req.user });
   });
 
