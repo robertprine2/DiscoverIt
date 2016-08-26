@@ -1,5 +1,8 @@
 angular.module('app')
-	.controller('findCtrl', ['$scope', function($scope) {
+	.controller('findCtrl', function($scope, $http) {
         $scope.title = "Find It!";
-        $scope.items = ['Profile', 'Discover It!', 'Find It!'];
-	}]);
+        $scope.discoveries = [];
+        $http.get('/find').success(function(data) {
+        	$scope.discoveries = data;
+        });
+	});

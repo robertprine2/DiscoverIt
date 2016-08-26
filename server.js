@@ -105,13 +105,13 @@ app.get('/login/google',
   passport.authenticate('google', {scope: 'profile'}));
 
 app.get('/login/google/return', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
+  passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
     
-    res.redirect('/profile');
+    res.redirect('/main');
   });
 
-app.get('/profile',
+app.get('/main',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
       
@@ -126,10 +126,30 @@ app.get('/profile',
         "points": 0
       });
 
-      res.send({ user: req.user });
+      res.sendfile(__dirname + '/public/views/main.html');
   });
 
+  app.post('/discover', function(req, res){
 
+      console.log(req.body.discovery);
+
+      db.discoveries.insert({
+        "user": req.user.displayName,
+        "userId": req.user.id,
+        "image": req.body.discovery.image,
+        "name": req.body.discovery.name,
+        "objectType": req.body.discovery.objectType,
+        "description": req.body.discovery.description,
+        "location": req.body.discovery.location,
+        "discoveredOn": req.body.discovery.discoveredOn
+      });
+
+//*********************************
+      //increase user discovery count
+//**********************************
+
+
+  });
 
 //******************************************************
 

@@ -11,16 +11,22 @@
 
 <body>
 
-	
-    	<div class="jumbotron">
-    		<div id="divInJumbo">
-	    		<h1>Discover It!</h1>
-	    		<!-- Container with the Sign-In button. -->
-				<a href="/login/google" class="button-white">Log In with Google</a>
-			</div>
-		</div>
-		
+ 	<!--Navbar stuff-->
 
+	
+	<div class="container" ng-app="app">
+
+    	<header ng-include="'views/nav.html'"></header>
+		
+		<div ui-view></div>
+
+		<footer ng-include="'views/footer.html'"></footer>
+
+	</div>
+
+	<!--Footer Stuff-->
+
+	
 
 	<!-- All of our JS code will be transpiled into this bundle.js file -->
 	<script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>

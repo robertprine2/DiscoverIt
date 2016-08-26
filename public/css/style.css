@@ -4,6 +4,57 @@ body {
 	text-align: center;
 }
 
+/*Index.html*/
+
+.jumbotron {
+    
+    height: 900px;
+    background: url("../images/jumbotron.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+ 
+#divInJumbo {
+    background-color: white;
+    position: relative;
+    top: 400px;
+}
+
+.jumbotron h1 {
+
+}
+
+.jumbotron .button-white{
+    width: 250px;  
+    height: 50px;  
+    color: #908d8d;
+    padding: 5px;
+    text-align: center;   
+    line-height: 50px;
+    background: white;
+    border: solid 2px #908d8d;
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    border-radius: 30px;
+    margin-bottom: 10px;
+     font-size: 25px;
+     line-height: 50px;
+     text-decoration: none;
+     color: black;
+}
+
+.button-white:focus {
+    outline:0;
+}
+
+.button-white:hover {
+    border: solid 2px black;
+    color: black;
+    cursor: pointer;
+}
+
 /*Navbar*/
 
 

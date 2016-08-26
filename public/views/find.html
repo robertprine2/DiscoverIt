@@ -1,7 +1,12 @@
 <h1>{{title}}</h1>
-<ul>
-	<li ng-repeat="object in objects"> 
-		{{object.picture}}
-		{{object.name}}
+<ul ng-controller="findCtrl">
+	<li ng-repeat="discovery in discoveries"> 
+		<img src="discovery.image" />
+		<h4>Name: {{discovery.name}}</h4>
+		<h4>Type of Discovery: {{discovery.objectType}}</h4>
+		<h4>Description: {{discovery.description}}</h4>
+		<h4>Discovered by: {{discovery.discoveredBy}}</h4>
+		<h4>Discovered on: {{discovery.discoveredOn | date}}</h4>
+		<!--location-->
 	</li>
 </ul>

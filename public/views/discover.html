@@ -1,31 +1,30 @@
 <h1>{{title}}</h1>
 
-<form name="discoverForm" ng-controller="discoverCtrl" ng-submit="discoverForm.$valid && discoverCtrl.addDiscovery" novalidate>
-<h4>Submit a Discovery</h4>
-	<section class="main-content">
+<form name="discoverForm" ng-controller="discoverCtrl" ng-submit="discoverForm.$valid && addDiscovery()" novalidate>
+
+	<!-- <section class="main-content"> -->
         <!-- A demo of the Camera API, currently implemented in Firefox and Google Chrome on Android. Choose to take a picture with your device's camera and a preview will be shown through createObjectURL or a FileReader object (choosing local files supported too). -->
-        <p>
-            <input ng-model="discoverCtrl.discovery.image" ng-click="discoverCtrl.takePicture" type="file" id="take-picture" accept="image/*" required />
-        </p>
+        <!-- <p>
+            <input ng-model="discovery.image" ng-click="discoverCtrl.takePicture" type="file" id="take-picture" accept="image/*" />
+        </p> -->
         <!-- Not currently working <h2>Preview:</h2>
         <p>
             <img src="about:blank" alt="" id="show-picture">
         </p> -->
-        <p id="error"></p>
-    </section>
+        <!-- <p id="error"></p>
+    </section> -->
 
-    <input ng-model="discoverCtrl.discovery.name" type="text" class="form-control" placeholder="What is the name of your discovery?" title="name" required />
+    <input ng-model="discovery.name" type="text" class="form-control" placeholder="What is the name of your discovery?" title="name" required />
 
-    <select ng-model="discoverCtrl.discovery.objects" class="form-control" ng-options="object for object in objects" title="objectType" required>
+    <select ng-model="discovery.objectType" class="form-control" ng-options="object for object in objects" title="objectType" required>
     	<option value="" disabled selected>Select what type of discovery you have found.</option>
     </select>
 
-    <textarea ng-model="discoverCtrl.discovery.description" class="form-control" placeholder="What does your discovery look/feel/smell like? Are there any other observations or knowledge you can share about it?" title="description" required></textarea>
+    <textarea ng-model="discovery.description" class="form-control" placeholder="What does your discovery look/feel/smell like? Are there any other observations or knowledge you can share about it?" title="description" required></textarea>
 
-    <!--location found by gps or typed in?-->
+    <!--location found by gps TODO-->
 
-    <!--discoveredBy userName-->
-
-    <!--dateDiscovered = Date.now()-->
-
+    <div>Discovery is {{discoverForm.$valid}}</div>
+    <input type="submit" class="btn btn-primary pull-right" value="Discover It!" />
+    <h4>{{didItWork}}</h4>
 </form>
