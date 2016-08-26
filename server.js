@@ -114,9 +114,19 @@ app.get('/login/google/return',
 app.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
-    
-   
-    res.send({ user: req.user });
+      
+
+      db.users.insert({
+        "email": "",
+        "avatar": req.user.photos[0].value,
+        "userName": req.user.displayName,
+        "discoveries": 0,
+        "edits": 0,
+        "confirms": 0,
+        "points": 0
+      });
+
+      res.send({ user: req.user });
   });
 
 
