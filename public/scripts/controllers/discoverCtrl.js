@@ -57,10 +57,25 @@ angular.module('app')
         	this.discovery.image = "";
         	this.discovery.location = ""/*gps api call*/;
         	this.discovery.discoveredOn = Date.now();
+        	console.log("I made it here!");
         	
-        	$http.post('/discover', {discovery: this.discovery}).success(function(data) {
-        		$scope.didItWork = "You discovered it!";
+        	$http.post('/discover', {discovery: this.discovery}).then(function(data) {
+        			console.log(data);
+		            $scope.didItWork = "You discovered it!";
+		       
+
         	});
         	this.discovery = {};
         };
+
+        $scope.updateMap = function() {
+
+        	$http.get('/map').success(function(data) {
+
+
+
+        	});
+
+        };
+
 	}]);

@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var expressSessions = require('express-session');
 var logger = require('morgan');
 var passport = require('passport');
+var GoogleMapsAPI = require('googlemaps');
 
 // Google oauth2 login, key, and secrets
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -77,15 +78,16 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveU
 app.use(passport.initialize());
 app.use(passport.session());
 
-//testing MongoDB ******
-// db.users.insert({
-// 	"avatar": "http://test.com",
-// 	"userName": "Joe Shmo",
-// 	"email": "joe@email.com",
-// 	"discoveries": 0,
-// 	"edits": 0,
-// 	"confirms": 0
-// });
+//googlemaps
+
+var publicConfig = {
+  key:                configAuth.googleMapAPIKey,
+  stagger_time:       1000, // for elevationPath
+  encode_polylines:   false,
+  secure:             true, // use https
+  proxy:              'http://127.0.0.1:9999' // optional, set a proxy for HTTP requests
+};
+var gmAPI = new GoogleMapsAPI(publicConfig);
 
 //******************************************************
 
@@ -115,18 +117,31 @@ app.get('/main',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
       
+      db.users.find({userName: req.user.displayName}, function(err, data){
+          console.log(data);
+          if (data.length >= 1){
+            res.sendfile(__dirname + '/public/views/main.html');
+          }
 
-      db.users.insert({
-        "email": "",
-        "avatar": req.user.photos[0].value,
-        "userName": req.user.displayName,
-        "discoveries": 0,
-        "edits": 0,
-        "confirms": 0,
-        "points": 0
+          else {
+
+            db.users.insert({
+              "email": "",
+              "avatar": req.user.photos[0].value,
+              "userName": req.user.displayName,
+              "googleId": req.user.id,
+              "discoveries": 0,
+              "edits": 0,
+              "confirms": 0,
+              "points": 0
+            });
+
+            res.sendfile(__dirname + '/public/views/main.html');
+
+          }
       });
 
-      res.sendfile(__dirname + '/public/views/main.html');
+      
   });
 
   app.post('/discover', function(req, res){
@@ -147,8 +162,34 @@ app.get('/main',
 //*********************************
       //increase user discovery count
 //**********************************
+      res.send("You submitted your discovery to the database!");
 
+  });
 
+  app.get('/map', function(req, res) {
+
+      // reverse geocode API
+      var reverseGeocodeParams = {
+        "latlng":        "51.1245,-0.0523",
+        "result_type":   "postal_code",
+        "language":      "en",
+        "location_type": "APPROXIMATE"
+      };
+
+      gmAPI.reverseGeocode(reverseGeocodeParams, function(err, result){
+        console.log(result);
+      });
+
+  });
+
+  app.get('/currentUser', function(req, res) {
+
+      db.users.find({$and: [{userName: req.user.displayName}, {googleId: req.user.id}]}, function(err, data){
+          console.log(data);
+          
+          res.send(data);
+
+      });
   });
 
 //******************************************************

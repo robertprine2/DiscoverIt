@@ -1,6 +1,6 @@
 <h1>{{title}}</h1>
 
-<form name="discoverForm" ng-controller="discoverCtrl" ng-submit="discoverForm.$valid && addDiscovery()" novalidate>
+<form name="discoverForm" ng-submit="discoverForm.$valid && addDiscovery()" novalidate>
 
 	<!-- <section class="main-content"> -->
         <!-- A demo of the Camera API, currently implemented in Firefox and Google Chrome on Android. Choose to take a picture with your device's camera and a preview will be shown through createObjectURL or a FileReader object (choosing local files supported too). -->
@@ -28,3 +28,11 @@
     <input type="submit" class="btn btn-primary pull-right" value="Discover It!" />
     <h4>{{didItWork}}</h4>
 </form>
+
+<div class="row">
+	<div class="col-md-12">
+
+		<div id="map"></div>
+
+	</div>
+</div>
