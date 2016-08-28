@@ -185,11 +185,19 @@ app.get('/main',
   app.get('/currentUser', function(req, res) {
 
       db.users.find({$and: [{userName: req.user.displayName}, {googleId: req.user.id}]}, function(err, data){
-          console.log(data);
           
           res.send(data);
 
       });
+  });
+
+  app.get('/find', function(req, res) {
+      
+      db.discoveries.find({}, function(err, data) {
+          res.send(data);
+
+      });
+
   });
 
 //******************************************************

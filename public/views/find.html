@@ -1,13 +1,22 @@
 <h1>{{title}}</h1>
-<ul ng-controller="findCtrl">
-	<li ng-repeat="discovery in discoveries"> 
+
+<input ng-model="searchName " type="text" class="form-control" placeholder="What name would you like to search?" />
+
+
+<div class="row" ng-repeat="discovery in discoveries | filter:searchName"> 
+	<div class="col-md-4">
 		<img src="discovery.image" />
+	</div>
+	<div class="col-md-4">
 		<h4>Name: {{discovery.name}}</h4>
 		<h4>Type of Discovery: {{discovery.objectType}}</h4>
 		<h4>Description: {{discovery.description}}</h4>
+	</div>
+	<div class="col-md-4">
 		<h4>Discovered by: {{discovery.discoveredBy}}</h4>
 		<h4>Discovered on: {{discovery.discoveredOn | date}}</h4>
 		<!--location-->
-	</li>
-</ul>
+	</div>
+</div>
+
 
