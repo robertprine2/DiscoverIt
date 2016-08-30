@@ -2,17 +2,17 @@
 
 <form name="discoverForm" ng-submit="discoverForm.$valid && addDiscovery()" novalidate>
 
-	<!-- <section class="main-content"> -->
+	<section class="main-content">
         <!-- A demo of the Camera API, currently implemented in Firefox and Google Chrome on Android. Choose to take a picture with your device's camera and a preview will be shown through createObjectURL or a FileReader object (choosing local files supported too). -->
-        <!-- <p>
-            <input ng-model="discovery.image" ng-click="discoverCtrl.takePicture" type="file" id="take-picture" accept="image/*" />
-        </p> -->
-        <!-- Not currently working <h2>Preview:</h2>
+        <p>
+            <input ng-model="discovery.image" ng-click="takePicture()" type="file" id="take-picture" accept="image/*" />
+        </p>
+        <h2>Preview:</h2>
         <p>
             <img src="about:blank" alt="" id="show-picture">
-        </p> -->
-        <!-- <p id="error"></p>
-    </section> -->
+        </p>
+        <p id="error"></p>
+    </section>
 
     <input ng-model="discovery.name" type="text" class="form-control" placeholder="What is the name of your discovery?" title="name" required />
 

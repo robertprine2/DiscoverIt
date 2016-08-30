@@ -1,3 +1,6 @@
+// shhhh it's a secret
+var configAuth = require('./auth');
+
 // requires express and body-parser
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -6,9 +9,16 @@ var logger = require('morgan');
 var passport = require('passport');
 var GoogleMapsAPI = require('googlemaps');
 
+// setting up cloudinary api
+var cloudinary = require('cloudinary');
+cloudinary.config({ 
+   cloud_name: configAuth.cloudinary.cloud_name, 
+   api_key: configAuth.cloudinary.api_key, 
+   api_secret: configAuth.cloudinary.api_secret 
+});
+
 // Google oauth2 login, key, and secrets
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
-var configAuth = require('./auth');
 
 // OAuth 2.0-based strategies require a `verify` function which receives the
 // credential (`accessToken`) for accessing the Facebook API on the user's
@@ -146,18 +156,24 @@ app.get('/main',
 
   app.post('/discover', function(req, res){
 
-      console.log(req.body.discovery);
+      var image = req.body.discovery.image;
+      console.log(image);
+      cloudinary.uploader.upload(image, function(result) { 
+          console.log(result);
+          var imageUrl = result.url;
+      
+          db.discoveries.insert({
+            "user": req.user.displayName,
+            "userId": req.user.id,
+            "image": imageUrl,
+            "name": req.body.discovery.name,
+            "objectType": req.body.discovery.objectType,
+            "description": req.body.discovery.description,
+            "location": req.body.discovery.location,
+            "discoveredOn": req.body.discovery.discoveredOn
+          }); //end of db.discoveries.insert
 
-      db.discoveries.insert({
-        "user": req.user.displayName,
-        "userId": req.user.id,
-        "image": req.body.discovery.image,
-        "name": req.body.discovery.name,
-        "objectType": req.body.discovery.objectType,
-        "description": req.body.discovery.description,
-        "location": req.body.discovery.location,
-        "discoveredOn": req.body.discovery.discoveredOn
-      });
+      }); // end of cloudinary.uploader
 
 //*********************************
       //increase user discovery count
