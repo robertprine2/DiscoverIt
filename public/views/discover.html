@@ -2,25 +2,19 @@
 
 <form name="discoverForm" ng-submit="discoverForm.$valid && addDiscovery()" novalidate>
 
-	<section class="main-content">
-        <!-- A demo of the Camera API, currently implemented in Firefox and Google Chrome on Android. Choose to take a picture with your device's camera and a preview will be shown through createObjectURL or a FileReader object (choosing local files supported too). -->
-        <p>
-            <input ng-model="discovery.image" ng-click="takePicture()" type="file" id="take-picture" accept="image/*" />
-        </p>
-        <h2>Preview:</h2>
-        <p>
-            <img src="about:blank" alt="" id="show-picture">
-        </p>
-        <p id="error"></p>
-    </section>
+	<script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>  
+              
+    <script type="text/javascript">  
 
-    <input ng-model="discovery.name" type="text" class="form-control" placeholder="What is the name of your discovery?" title="name" required />
+    </script>
 
-    <select ng-model="discovery.objectType" class="form-control" ng-options="object for object in objects" title="objectType" required>
+    <input ng-model="discovery.name" type="text" class="form-control" id="name" placeholder="What is the name of your discovery?" title="name" required />
+
+    <select ng-model="discovery.objectType" class="form-control" id="objectType" ng-options="object for object in objects" title="objectType" required>
     	<option value="" disabled selected>Select what type of discovery you have found.</option>
     </select>
 
-    <textarea ng-model="discovery.description" class="form-control" placeholder="What does your discovery look/feel/smell like? Are there any other observations or knowledge you can share about it?" title="description" required></textarea>
+    <textarea ng-model="discovery.description" class="form-control" placeholder="What does your discovery look/feel/smell like? Are there any other observations or knowledge you can share about it?" title="description" id="description" required></textarea>
 
     <!--location found by gps TODO-->
 

@@ -6,9 +6,7 @@ angular.module('app')
         	$http.get('/find').success(function(data) {
 	        	
 	        	for (var i = 0; i < data.length; i++) {
-	        		console.log(data);
 	        		var discovery = {};
-	        		console.log(data[i].image);
 	        		discovery.image = data[i].image;
 	        		discovery.name = data[i].name;
 	        		discovery.objectType = data[i].objectType;
