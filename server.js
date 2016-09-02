@@ -182,6 +182,12 @@ app.get('/main',
 
   });
 
+  app.get('/mapkey', function(req, res) {
+
+      res.send(configAuth.googleMapAPIKey);
+
+  });
+
   app.get('/map', function(req, res) {
 
       // reverse geocode API
