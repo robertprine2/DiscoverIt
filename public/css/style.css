@@ -4,6 +4,11 @@ body {
 	text-align: center;
 }
 
+/*to keep errors in routing from happening between angular and bootstrap*/
+.nav, .pagination, .carousel, .panel-title a { 
+  cursor: pointer; 
+}
+
 /*Index.html*/
 
 /* Carousel base class */

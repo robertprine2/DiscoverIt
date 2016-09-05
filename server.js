@@ -178,6 +178,24 @@ app.get('/main',
 //*********************************
       //increase user discovery count
 //**********************************
+      
+      db.users.find({googleId: req.user.id}, function(err, found) {
+          console.dir(found);
+
+          var newDiscoveryCount = parseInt(found[0].discoveries) + 1;
+          console.log("discoveries: " + found[0].discoveries);
+
+          var newPointsCount = parseInt(found[0].points) + 5; 
+          console.log("points: " + found[0].points);
+          
+          db.users.update({googleId: req.user.id}, {$set: {discoveries: newDiscoveryCount, points: newPointsCount}}, function(err, docs) {
+              if (err) console.log(err);
+              console.log(docs);
+          });
+
+      })
+      
+
       res.send("You submitted your discovery to the database!");
 
   });
@@ -218,6 +236,17 @@ app.get('/main',
       db.discoveries.find({}, function(err, data) {
           res.send(data);
 
+      });
+
+  });
+
+  app.post('/findImage', function(req, res) {
+
+      console.dir(req.body);
+
+      db.discoveries.find({image: req.body.image}, function(err, data) {
+          console.dir(data);
+          res.send(data);
       });
 
   });
