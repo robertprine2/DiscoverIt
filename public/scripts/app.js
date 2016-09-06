@@ -5,7 +5,7 @@ var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'ngAnimate'])
 
         $stateProvider
         .state('profile', {
-            url: '/profile',
+            url: '/',
             templateUrl: 'views/profile.html',
             controller: 'profileCtrl'
         })

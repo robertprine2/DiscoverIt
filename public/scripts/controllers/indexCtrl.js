@@ -1,10 +1,11 @@
-var app = angular.module('app', ['ui.bootstrap']).controller('indexCtrl', ['$scope', '$http', function($scope, $http) {
+angular.module('app').controller('indexCtrl', ['$scope', '$http', function($scope, $http) {
   $scope.myInterval = 5000;
   $scope.noWrapSlides = false;
   $scope.active = 0;
   var slides = $scope.slides = [];
   var currIndex = 0;
-
+  // array to store discoveries so that a random can be found
+  $scope.discoveries = [];
 
 
   $scope.addSlide = function() {
@@ -22,24 +23,36 @@ var app = angular.module('app', ['ui.bootstrap']).controller('indexCtrl', ['$sco
             discovery.location = data[i].location;
             
             $scope.discoveries.push(discovery);
-
+            console.log(discovery);
+            console.log($scope.slides);
         } // end of for loop
 
-        for (var i = 0; i < 4; i++) {
-            var discovery = {};
-            var randNum = Math.floor(Math.random() * discoveries.length);
-            slides.push({
-                image = discoveries[randNum].image,
-                name = discoveries[randNum].name,
-                objectType = discoveries[randNum].objectType,
-                description = discoveries[randNum].description,
-                discoveredBy = discoveries[randNum].user,
-                discoveredOn = discoveries[randNum].discoveredOn,
-                location = discoveries[randNum].location
-            });
-        }
+        var used = []
 
-    });
+        do {
+            
+            var randNum = Math.floor(Math.random() * $scope.discoveries.length);
+
+            if (used.indexOf(randNum) < 0) {
+                used.push(randNum);
+
+                $scope.slides.push({
+                    id: currIndex++,
+                    image: $scope.discoveries[randNum].image,
+                    name: $scope.discoveries[randNum].name,
+                    objectType: $scope.discoveries[randNum].objectType,
+                    description: $scope.discoveries[randNum].description,
+                    discoveredBy: $scope.discoveries[randNum].user,
+                    discoveredOn: $scope.discoveries[randNum].discoveredOn,
+                    location: $scope.discoveries[randNum].location
+                });
+
+            } // end of if used.indexOf
+
+            
+        } while (used.length < 4);
+
+    }); // end of $http.get
 
     
 
@@ -57,9 +70,8 @@ var app = angular.module('app', ['ui.bootstrap']).controller('indexCtrl', ['$sco
     assignNewIndexesToSlides(indexes);
   };
 
-  for (var i = 0; i < 4; i++) {
-    $scope.addSlide();
-  }
+  $scope.addSlide();
+  
 
   // Randomize logic below
 

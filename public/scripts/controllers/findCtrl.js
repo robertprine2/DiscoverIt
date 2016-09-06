@@ -3,7 +3,7 @@ var globalDiscoveries = [];
 var modal = {};
 
 angular.module('app')
-	.controller('findCtrl', function($scope, $http) {
+	.controller('findCtrl', function($scope, $http, $modal, $log) {
         $scope.title = "Find It!";
         $scope.discoveries = [];
 
@@ -43,7 +43,33 @@ angular.module('app')
 	        });
         };
 
+        this.discoveryModal = function (size, discoveryData) {
+        	
+		    var modalInstance = $uibModal.open({
+		      animation: $ctrl.animationsEnabled,
+		      ariaLabelledBy: 'modal-title',
+		      ariaDescribedBy: 'modal-body',
+		      templateUrl: 'myModalContent.html',
+		      controller: 'ModalInstanceCtrl',
+		      controllerAs: '$ctrl',
+		      size: size,
+		      resolve: {
+		        items: function () {
+		          return $ctrl.items;
+		        }
+		      }
+		    });
+
+		    modalInstance.result.then(function (selectedItem) {
+		      $ctrl.selected = selectedItem;
+		    }, function () {
+		      $log.info('Modal dismissed at: ' + new Date());
+		    });
+	  	};
+
         $scope.getDiscoveries();
+
+
 
 	});
 
