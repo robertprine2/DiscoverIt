@@ -9,10 +9,14 @@ body {
   cursor: pointer; 
 }
 
+.modal {
+  display: block;
+}
+
 /*Index.html*/
 
 /* Carousel base class */
-    .carousel {
+    /*.carousel {
       margin-bottom: 60px;
     }
 
@@ -48,7 +52,7 @@ body {
       max-width: 550px;
       padding: 0 20px;
       margin-top: 200px;
-      
+
     }
     .carousel-caption h1,
     .carousel-caption .lead {
@@ -59,7 +63,7 @@ body {
     }
     .carousel-caption .btn {
       margin-top: 10px;
-    }
+    }*/
 
 
 .jumbotron {
