@@ -3,40 +3,44 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Discover It!</title>
+	<link rel="SHORTCUT ICON" href="/images/favicon.ico">
+    <link rel="icon" href="/images/favicon.ico" type="image/ico">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cutive" rel="stylesheet">
 	<script src = "https://plus.google.com/js/client:platform.js" async defer></script>
 	<!-- Here we include bootstrap. This will be made available to all of the generated HTML/JS that React generates-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body id="indexBody">
 
 	
-    	<div class="jumbotron">
-    		<div id="divInJumbo">
-	    		<h1>Discover It!</h1>
-	    		<!-- Container with the Sign-In button. -->
-				<a href="/login/google" class="button-white">Log In with Google</a>
+		<div class="row-fluid">
+			<div class="col-md-12">
+		    	<img class="logoImage" src="../images/discoverItLogo.png">
+		    	<h3>Explore the world around you!</h3>
+			    <a href="/login/google" id="button-white">Google Log In</a>
+						
+			
+				<div class="container" ng-app="app">
+					<div ng-controller="indexCtrl">
+					  <div style="height: 305px">
+					    <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+					      <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+					        <img class="carouselImages" ng-src="{{slide.image}}" style="margin:auto;">
+					        <div class="carousel-caption">
+					          <h4>Name: {{slide.name}}</h4>
+					          <p>Discovered By: {{slide.discoveredBy}}</p>
+					        </div>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+				</div>
 			</div>
 		</div>
-		
-		
-<div class="container" ng-app="app">
-	<div ng-controller="indexCtrl">
-	  <div style="height: 305px">
-	    <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-	      <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-	        <img ng-src="{{slide.image}}" style="margin:auto;">
-	        <div class="carousel-caption">
-	          <h4>Name: {{slide.name}}</h4>
-	          <p>{{slide.description}}</p>
-	          <a href="/login/google" class="button-white">Log In with Google</a>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-</div>
+	
 
 	<!-- All of our JS code will be transpiled into this bundle.js file -->
 	<script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>

@@ -1,7 +1,30 @@
-<h1>{{title}}</h1>
-<img src={{user.avatar}}>
-<h3>Name: {{user.userName}}</h3>
-<h3>Discoveries Made: {{user.discoveries}}</h3>
-<h3>Discoveries Edited: {{user.edits}}</h3>
-<h3>Discoveries Confirmed: {{user.confirms}}</h3>
-<h3>Total Points: {{user.points}}</h3>
+<h1>{{user.userName}}</h1>
+<div class="row">
+	<div class="col-md-3">
+
+		<img ng-src={{user.avatar}} id="avatar">
+
+	</div>
+
+	<div class="col-md-3">
+		<div class="profileStats">
+			<h2>{{user.discoveries}}</h2>
+			<p>Discoveries</p>
+		</div>
+	</div>
+
+	<div class="col-md-3">
+		<div class="profileStats">
+			<h2>{{user.confirms}}</h2>
+			<p>Confirmations</p>
+		</div>
+	</div>
+
+	<div class="col-md-3">
+		<div class="profileStats">
+			<h2>{{user.points}}</h2>
+			<p>Points</p>
+		</div>
+	</div>
+</div>
+

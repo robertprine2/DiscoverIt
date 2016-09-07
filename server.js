@@ -107,12 +107,6 @@ app.get('/',  function(req, res) {
     res.sendFile(__dirname + '/public/views/index.html');
   });
 
-app.get('/login',
-  function(req, res){
-    
-    res.sendFile(__dirname + '/public/views/login.html');
-  });
-
 app.get('/login/google',
   passport.authenticate('google', {scope: 'profile'}));
 
@@ -142,7 +136,9 @@ app.get('/main',
               "googleId": req.user.id,
               "discoveries": 0,
               "edits": 0,
+              "finds": 0,
               "confirms": 0,
+              "confirmedImages": [],
               "points": 0
             });
 
@@ -170,7 +166,9 @@ app.get('/main',
             "objectType": req.body.discovery.objectType,
             "description": req.body.discovery.description,
             "location": req.body.discovery.location,
-            "discoveredOn": req.body.discovery.discoveredOn
+            "discoveredOn": req.body.discovery.discoveredOn,
+            "suggestedEdits": [],
+            "confirms": 0
           }); //end of db.discoveries.insert
 
       }); // end of cloudinary.uploader
@@ -250,6 +248,53 @@ app.get('/main',
       });
 
   });
+
+  app.post('/confirm', function(req, res) {
+      
+      var confirmedImage = req.body.modal.image;
+      
+      var discoveryFoundBy = req.body.modal.discoveredBy;
+
+      db.users.find({googleId: req.user.id}, function(err, foundUser) {
+
+
+
+          // if user isn't confirming more than once and isn't confirming his own discovery
+          console.log(foundUser);
+          if (foundUser.confirmedImages.indexOf(confirmedImage) >= 0
+              && foundUser.userName != discoveryFoundBy) {
+
+              var userFindCount = parseInt(foundUser[0].finds) + 1;
+
+              var newPointsCount = parseInt(foundUser[0].points) + 10;
+
+              // add points and find count to user that found discovery
+              db.users.update({googleId: req.user.id}, {$set: {finds: userFindCount, points: newPointsCount}}, {$push: {confirmedImages: confirmedImage}}, function(err, docs) {
+                  if (err) console.log(err);
+                  console.log(docs);
+              });
+
+          } // end of if user is confirming own finds or trying to confirm more than once.
+
+          else if (foundUser.userName == discoveryFoundBy) {
+
+              res.send("You can't confirm your own discoveries!");
+
+          }
+
+          else {
+
+              res.send("You have already confirmed this!");
+
+          }
+
+          
+
+      }); // end of db.users.findGoogleId
+
+    
+
+  }); // end of app.post confirm
 
 //******************************************************
 

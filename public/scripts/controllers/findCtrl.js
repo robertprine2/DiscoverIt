@@ -17,10 +17,7 @@ angular.module('app')
 
 		},true);
 
-  //       $scope.modal = $scope.$watch(function watchFunction(scope) {
-		//     return modal
-		// });
-		// console.log("modal? " + $scope.modal);
+ 
 
         $scope.getDiscoveries = function() {
         	$http.get('/find').success(function(data) {
@@ -57,6 +54,16 @@ angular.module('app')
 		      controller: function ($scope, $uibModalInstance, discoveryData) {
 		      	  $scope.discoveryData = discoveryData;
 		      	  console.log(discoveryData);
+
+		      	  $scope.confirmDiscovery = function() {
+		        	  $http.post('/confirm', {modal: $scope.discoveryData}).then(function(data) {
+			        	
+		        		  console.log(data);
+		        		  $uibModalInstance.dismiss('cancel');
+
+			          });
+
+		          };
 		      },
 		      // controllerAs: 'this',
 		      size: size,
@@ -116,6 +123,8 @@ angular.module('app')
 					custom_param: globalDiscoveries[i].image
 				});
 
+				marker.metadata = {type: "point", id: globalDiscoveries[i].image};
+
 				marker.addListener('click', function() {
             		var image = marker.custom_param;
             		
@@ -129,8 +138,16 @@ angular.module('app')
             		});
 
             		// targets hidden a tag to open modal
-            		angular.element('#myModalShower').trigger('click');
+            		// angular.element('#myModalShower').trigger('click');
             		// $('#myModal').modal('show');
+
+            		// want to open modal from marker...
+            		function openModal(size, modal) {
+					    var scope = angular.element(document.getElementById(image)).scope();
+					    scope.$apply(function () {
+						    scope.discoveryModal('lg', modal);
+					    });
+					};
 
             	});
             }

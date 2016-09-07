@@ -1,38 +1,39 @@
 <h1>{{title}}</h1>
 
-<input ng-model="searchName " type="text" class="form-control" placeholder="What name would you like to search?" />
+<input ng-model="searchName " type="text" id="searchDiscoveries" class="form-control" placeholder="What name would you like to search?" />
 
 
-<div class="row" ng-repeat="discovery in discoveries | filter:searchName"> 
-	<div class="col-md-4">
-		<a ng-click="discoveryModal('lg', discovery)"><img ng-src={{discovery.image}} style="height: 150px; width: 100%"/></a>
-	</div>
-	<div class="col-md-4">
-		<h4>Name: {{discovery.name}}</h4>
-		<h4>Type of Discovery: {{discovery.objectType}}</h4>
-		<h4>Description: {{discovery.description}}</h4>
-	</div>
-	<div class="col-md-4">
-		<h4>Discovered by: {{discovery.discoveredBy}}</h4>
-		<h4>Discovered on: {{discovery.discoveredOn | date}}</h4>
-		<!--location-->
-	</div>
+<div class="row">
+    <div ng-repeat="discovery in discoveries | filter:searchName"> 
+    	<div class="col-sm-2 imgList">
+    		<a ng-click="discoveryModal('lg', discovery)"><img ng-src={{discovery.image}} style="height: 150px; width: 100%"/></a>
+    	</div>
+    	<!-- <div class="col-md-4">
+    		<h4>Name: {{discovery.name}}</h4>
+    		<h4>Type of Discovery: {{discovery.objectType}}</h4>
+    		<h4>Description: {{discovery.description}}</h4>
+    	</div>
+    	<div class="col-md-4">
+    		<h4>Discovered by: {{discovery.discoveredBy}}</h4>
+    		<h4>Discovered on: {{discovery.discoveredOn | date}}</h4>
+    	</div> -->
 
-	<script type="text/ng-template" id="findItModal.html">
-    
-        <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">{{discoveryData.name}}</h3>
-        </div>
-        <div class="modal-body" id="modal-body">
-            
-            <h1>{{discoveryData.description}}</h1> 
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-        </div>
+    	<script type="text/ng-template" id="findItModal.html">
+        
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">{{discoveryData.name}}</h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <img ng-src="{{discoveryData.image}}" style="height: 300px; width: 100%">
+                <h1>{{discoveryData.description}}</h1> 
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="confirmDiscovery()">Found It!</button>
+                <button class="btn btn-warning" ng-click="suggestEdit()">Suggest Edit</button>
+            </div>
 
-	</script>
+    	</script>
+    </div>
 </div>
 
 <div class="row">

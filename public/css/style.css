@@ -13,80 +13,37 @@ body {
   display: block;
 }
 
+h1, h2, h3, h4, h5, h6, a, img {
+  font-family: 'Open Sans', sans-serif;
+}
+
+p {
+  font-family: 'Cutive', serif;
+}
+
+h3 {
+  font-size: 35px;
+}
+
 /*Index.html*/
 
-/* Carousel base class */
-    /*.carousel {
-      margin-bottom: 60px;
-    }
-
-    .carousel .container {
-      position: relative;
-      z-index: 9;
-    }
-
-    .carousel-control {
-      height: 80px;
-      margin-top: 0;
-      font-size: 120px;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
-      background-color: transparent;
-      border: 0;
-      z-index: 10;
-    }
-
-    .carousel .item {
-      height: 500px;
-    }
-    .carousel img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      height: 500px;
-    }
-
-    .carousel-caption {
-      background-color: transparent;
-      position: static;
-      max-width: 550px;
-      padding: 0 20px;
-      margin-top: 200px;
-
-    }
-    .carousel-caption h1,
-    .carousel-caption .lead {
-      margin: 0;
-      line-height: 1.25;
-      color: #fff;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
-    }
-    .carousel-caption .btn {
-      margin-top: 10px;
-    }*/
-
-
-.jumbotron {
-    
-    height: 900px;
-    background: url("../images/jumbotron.jpg") no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
- 
-#divInJumbo {
-    background-color: white;
-    position: relative;
-    top: 400px;
+.logoImage {
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
-.jumbotron h1 {
-
+.carouselImages {
+  width: 100%;
+  height: 500px;
 }
 
-.jumbotron .button-white{
+.carousel-caption {
+  background-color: black;
+  opacity: .6;
+}
+
+#indexBody #button-white{
     width: 250px;  
     height: 50px;  
     color: #908d8d;
@@ -99,59 +56,71 @@ body {
     -webkit-border-radius: 30px;
     border-radius: 30px;
     margin-bottom: 10px;
-     font-size: 25px;
-     line-height: 50px;
-     text-decoration: none;
-     color: black;
+    font-size: 25px;
+    line-height: 50px;
+    text-decoration: none;
+    margin-bottom: 25px;
 }
 
-.button-white:focus {
+#button-white:focus {
     outline:0;
 }
 
-.button-white:hover {
+#button-white:hover {
     border: solid 2px black;
     color: black;
     cursor: pointer;
 }
 
+
+
 /*Navbar*/
 
-
-
-
-/*Login Page*/
-
-.profile{
-    border: 3px solid #B7B7B7;
-    padding: 10px;
-    margin-top: 10px;
-    width: 350px;
-    background-color: #F7F7F7;
-    height: 160px;
+.logo {
+  width: 20%;
 }
-.profile p{margin: 0px 0px 10px 0px;}
-.head{margin-bottom: 10px;}
-.head a{float: right;}
-.profile img{width: 100px;float: left;margin: 0px 10px 10px 0px;}
-.proDetails{float: left;}
+
+
+
 
 /*Profile Page*/
 
+#avatar {
+  width: 50%;
+  margin-bottom: 25px;
+}
 
+.profileStats {
+    color: black;
+    padding: 5px;
+    text-align: center;   
+    line-height: 50px;
+    background: white;
+    border: solid 2px black;
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    border-radius: 30px;
+    margin-bottom: 10px;
+    line-height: 50px;
+    text-decoration: none;
+    margin-bottom: 25px;
+}
 
 /*Find It Page*/
 
+#searchDiscoveries {
+  margin-bottom: 25px;
+}
 
+.imgList {
+  margin-bottom: 25px;
+}
 
 /*Discover It Page*/
 
 
 /*googlemap*/
 
-.angular-google-map-container {
-    height: 400px;
-}
 #map {
     height: 500px;
     width: 100%;

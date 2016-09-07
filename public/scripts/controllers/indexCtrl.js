@@ -42,7 +42,7 @@ angular.module('app').controller('indexCtrl', ['$scope', '$http', function($scop
                     name: $scope.discoveries[randNum].name,
                     objectType: $scope.discoveries[randNum].objectType,
                     description: $scope.discoveries[randNum].description,
-                    discoveredBy: $scope.discoveries[randNum].user,
+                    discoveredBy: $scope.discoveries[randNum].discoveredBy,
                     discoveredOn: $scope.discoveries[randNum].discoveredOn,
                     location: $scope.discoveries[randNum].location
                 });
