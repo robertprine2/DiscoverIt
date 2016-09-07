@@ -40,6 +40,7 @@ angular.module('app')
 	        	} // end of for loop
 
 	        	globalDiscoveries = $scope.discoveries;
+	        	console.log($scope.discoveries);
 	        });
         };
 
@@ -52,15 +53,17 @@ angular.module('app')
 		      windowClass : 'show',
 		      ariaLabelledBy: 'modal-title',
 		      ariaDescribedBy: 'modal-body',
-		      templateUrl: 'views/findItModal.html',
-		      controller: function ($scope, $uibModalInstance, items) {
-		      	  $scope.items = items;
+		      templateUrl: 'findItModal.html',
+		      controller: function ($scope, $uibModalInstance, discoveryData) {
+		      	  $scope.discoveryData = discoveryData;
+		      	  console.log(discoveryData);
 		      },
 		      // controllerAs: 'this',
 		      size: size,
 		      resolve: {
-		        items: function () {
-		          return discoveryData;
+		        discoveryData: function () {
+		        	console.log(discoveryData);
+		          	return discoveryData;
 		        }
 		      }
 		    });
