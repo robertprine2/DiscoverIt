@@ -17,7 +17,8 @@ angular.module('app')
 
 		},true);
 
- 
+        $scope.message = "Hi";
+ 		$scope.show = false;
 
         $scope.getDiscoveries = function() {
         	$http.get('/find').success(function(data) {
@@ -26,11 +27,13 @@ angular.module('app')
 	        		var discovery = {};
 	        		discovery.image = data[i].image;
 	        		discovery.name = data[i].name;
+	        		discovery.userId = data[i].userId;
 	        		discovery.objectType = data[i].objectType;
 	        		discovery.description = data[i].description;
 	        		discovery.discoveredBy = data[i].user;
 	        		discovery.discoveredOn = data[i].discoveredOn;
 	        		discovery.location = data[i].location;
+	        		discovery.confirms = data[i].confirms;
 	        		
 	        		$scope.discoveries.push(discovery);
 
@@ -53,14 +56,20 @@ angular.module('app')
 		      templateUrl: 'findItModal.html',
 		      controller: function ($scope, $uibModalInstance, discoveryData) {
 		      	  $scope.discoveryData = discoveryData;
-		      	  console.log(discoveryData);
-
+		      	  
 		      	  $scope.confirmDiscovery = function() {
 		        	  $http.post('/confirm', {modal: $scope.discoveryData}).then(function(data) {
 			        	
 		        		  console.log(data);
-		        		  $uibModalInstance.dismiss('cancel');
+		        		  $uibModalInstance.close();
 
+		        		  $scope.message = data;
+
+		        		  $scope.show = true;
+
+		        		  $timeout(function() {
+						      $scope.show = false;
+						  }, 3000);
 			          });
 
 		          };
