@@ -1,3 +1,5 @@
+var path = require('path');
+
 // shhhh it's a secret
 var configAuth = require(path.join(__dirname, 'auth.js'));
 
