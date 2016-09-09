@@ -1,6 +1,6 @@
 <h1>{{title}}</h1>
 
-<h1 ng-model="message" ng-show="show">{{message}}</h1>
+<h1 ng-model="message" ng-show="show" class="message fadein fadeout">{{message}}</h1>
 
 <input ng-model="searchName " type="text" id="searchDiscoveries" class="form-control" placeholder="What name would you like to search?" />
 
@@ -23,13 +23,18 @@
     	<script type="text/ng-template" id="findItModal.html">
         
             <div class="modal-header">
-                <h3 class="modal-title" id="modal-title">{{discoveryData.name}}</h3>
+                <h1 class="modal-title pull-left" id="modal-title">{{discoveryData.name}}</h1>
+                <p class="modal-title pull-right">Discovered by: {{discoveryData.discoveredBy}}</p>
+                <br>
+                <p class="pull-right">Discovered on: {{discoveryData.discoveredOn | date}}</p>
+                <h1 ng-model="message" ng-show="show" class="message fadein fadeout">{{message}}</h1>
             </div>
             <div class="modal-body" id="modal-body">
-                <img ng-src="{{discoveryData.image}}" style="height: 300px; width: 100%">
-                <h1>{{discoveryData.description}}</h1> 
+                <img ng-src="{{discoveryData.image}}" style="height: 400px; width: 100%">
+                <p class="leftAlign">{{discoveryData.description}}</p> 
             </div>
             <div class="modal-footer">
+                <p class="pull-left">Confirms: {{discoveryData.confirms}}</p>
                 <button class="btn btn-primary" type="button" ng-click="confirmDiscovery()">Found It!</button>
                 <button class="btn btn-warning" ng-click="suggestEdit()">Suggest Edit</button>
             </div>

@@ -4,6 +4,10 @@ body {
 	text-align: center;
 }
 
+.leftAlign {
+  text-align: left;
+}
+
 /*to keep errors in routing from happening between angular and bootstrap*/
 .nav, .pagination, .carousel, .panel-title a { 
   cursor: pointer; 
@@ -43,7 +47,7 @@ h3 {
   opacity: .6;
 }
 
-#indexBody #button-white{
+#cheatbootstrap #button-white{
     width: 250px;  
     height: 50px;  
     color: #908d8d;

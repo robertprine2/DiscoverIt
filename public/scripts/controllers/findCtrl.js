@@ -1,9 +1,14 @@
 var globalDiscoveries = [];
 
+var latitude = 0;
+var longitude = 0;
+
 var modal = {};
 
+
+
 angular.module('app')
-	.controller('findCtrl', function($scope, $http, $uibModal, $log) {
+	.controller('findCtrl', function($scope, $http, $uibModal, $log, $timeout) {
         $scope.title = "Find It!";
         $scope.discoveries = [];
 
@@ -58,20 +63,25 @@ angular.module('app')
 		      	  $scope.discoveryData = discoveryData;
 		      	  
 		      	  $scope.confirmDiscovery = function() {
-		        	  $http.post('/confirm', {modal: $scope.discoveryData}).then(function(data) {
-			        	
-		        		  console.log(data);
-		        		  $uibModalInstance.close();
 
-		        		  $scope.message = data;
+		      	  	  initMap(function(){
+			        	  $http.post('/confirm', {modal: $scope.discoveryData, latitude: latitude, longitude: longitude}).then(function(data) {
+				        	
+				        	  $scope.message = data.data;
 
-		        		  $scope.show = true;
+			        		  $scope.show = true;
 
-		        		  $timeout(function() {
-						      $scope.show = false;
-						  }, 3000);
-			          });
+			        		  $timeout(function() {
+							      $scope.show = false
+							      $uibModalInstance.close();
+							  }, 3000);
 
+			        		  console.log(data);
+			        		  
+
+			        		  
+				          });
+		      	  	  });
 		          };
 		      },
 		      // controllerAs: 'this',
@@ -94,7 +104,7 @@ angular.module('app')
         
 	});
 
-	function initMap() {
+	function initMap(callback) {
         
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 28.5383, lng: -81.3792},
@@ -104,7 +114,7 @@ angular.module('app')
         var infoWindow = new google.maps.InfoWindow({map: map});
 
         // Try HTML5 geolocation.
-        if (navigator.geolocation) {
+        // if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             latitude = position.coords.latitude;
             longitude = position.coords.longitude;
@@ -160,14 +170,16 @@ angular.module('app')
 
             	});
             }
-
+            if (callback){
+            	callback()
+            }
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
+        // } else {
+        //   // Browser doesn't support Geolocation
+        //   handleLocationError(false, infoWindow, map.getCenter());
+        // }
       }
 
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
