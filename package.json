@@ -2,7 +2,7 @@
   "name": "discoverit",
   "version": "1.0.0",
   "description": "An app to promote learning and physical fitness.",
-  "main": "public/index.html",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
