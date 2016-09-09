@@ -1,11 +1,11 @@
 <h1>{{user.userName}}</h1>
 <div class="row">
-	<div class="col-md-3">
-
+	<div class="col-md-4 col-md-offset-4">
 		<img ng-src={{user.avatar}} id="avatar">
-
 	</div>
+</div>
 
+<div class="row">
 	<div class="col-md-3">
 		<div class="profileStats">
 			<h2>{{user.discoveries}}</h2>
@@ -16,7 +16,14 @@
 	<div class="col-md-3">
 		<div class="profileStats">
 			<h2>{{user.confirms}}</h2>
-			<p>Confirmations</p>
+			<p>Your Discovery Confirmations</p>
+		</div>
+	</div>
+
+	<div class="col-md-3">
+		<div class="profileStats">
+			<h2>{{user.finds}}</h2>
+			<p>Discoveries Found</p>
 		</div>
 	</div>
 

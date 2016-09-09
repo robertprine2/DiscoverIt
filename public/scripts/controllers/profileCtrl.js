@@ -11,6 +11,7 @@ angular.module('app')
 	        	$scope.user.edits = data[0].edits;
 	        	$scope.user.confirms = data[0].confirms;
 	        	$scope.user.points = data[0].points;
+	        	$scope.user.finds = data[0].finds;
 	        });
         };
 
