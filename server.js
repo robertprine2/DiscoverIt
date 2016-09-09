@@ -1,7 +1,5 @@
-var path = require('path');
-
 // shhhh it's a secret
-var configAuth = require(path.join(__dirname, 'auth.js'));
+var configAuth = require('./auth.js');
 
 // requires express and body-parser
 var express = require('express');
