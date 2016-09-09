@@ -1,5 +1,5 @@
 // shhhh it's a secret
-var configAuth = require('./auth.js');
+var configAuth = require('auth');
 
 // requires express and body-parser
 var express = require('express');
