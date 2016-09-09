@@ -121,13 +121,18 @@ app.get('/main',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
       
-      db.users.find({userName: req.user.displayName}, function(err, data){
+      db.users.find({googleId: req.user.id}, function(err, data){
           console.log(data);
           if (data.length >= 1){
             res.sendfile(__dirname + '/public/views/main.html');
           }
 
           else {
+
+            if (req.user.photos.length < 1) {
+                req.user.photos.push('/public/images/personlogo.jpg');
+                console.log(req.user.photos);
+            }
 
             db.users.insert({
               "email": "",
@@ -148,6 +153,12 @@ app.get('/main',
       });
 
       
+  });
+
+  app.get('/logout', function(req, res) {
+      console.log("logged out!");
+      req.logout();
+      res.redirect('/');
   });
 
   app.post('/discover', function(req, res){
@@ -252,76 +263,114 @@ app.get('/main',
   app.post('/confirm', function(req, res) {
       
       var confirmedImage = req.body.modal.image;
+
+      var userLatitude = req.body.latitude;
+
+      var userLongitude = req.body.longitude;
       
       var discoveryFoundBy = req.body.modal.userId;
 
-      db.users.find({googleId: req.user.id}, function(err, foundUser) {
+      db.discoveries.find({image: confirmedImage}, function(err, foundDiscovery) {
 
-          // if user isn't confirming more than once and isn't confirming his own discovery
-          if (foundUser[0].confirmedImages.indexOf(confirmedImage) < 0
-              && foundUser[0].googleId != discoveryFoundBy) {
+          console.dir(foundDiscovery);
 
-              // new finds count and points for user
-              var userFindCount = parseInt(foundUser[0].finds) + 1;
-              var newPointsCount = parseInt(foundUser[0].points) + 10;
+          var discoveryLatitudeAdd = foundDiscovery[0].location.lat + .02;
 
-              // new confirms count for discovery
-              var newConfirmCount = parseInt(req.body.modal.confirms) + 1;
+          var discoveryLatitudeSub = foundDiscovery[0].location.lat - .02;
 
-              // adds image url to confirms array so that they can't confirm more than once
-              db.users.update({googleId: req.user.id}, {$push: {confirmedImages: confirmedImage}}, function(err, docs) {
-                  if (err) console.log(err);
-                  console.log(docs);
-              });
+          var discoveryLongitudeAdd = foundDiscovery[0].location.lng + .02;
 
-              // add points and find count to user that found discovery
-              db.users.update({googleId: req.user.id}, {$set: {finds: userFindCount, points: newPointsCount}}, function(err, docs) {
-                  if (err) console.log(err);
-                  console.log(docs);
-              });
+          var discoveryLongitudeSub = foundDiscovery[0].location.lng - .02;
 
-              // adds confirm count to discovery
-              db.discoveries.update({image: confirmedImage}, {$set: {confirms: newConfirmCount}}, function(err, docs) {
-                  if (err) console.log(err);
-                  console.log(docs);
-              });
+          console.log(discoveryLatitudeAdd);
+          console.log(discoveryLatitudeSub);
+          console.log(discoveryLongitudeAdd);
+          console.log(discoveryLongitudeSub);
 
-              // adds points and confirm count to the discoverer
-              db.users.find({googleId: discoveryFoundBy}, function(err, discoverer) {
-                  if (err) console.log(err);
-                  console.log(docs);
-                  // new confirm count and points for discoverer
-                  var newDiscovererConfirms = parseInt(discoverer[0].confirms) + 1;
-                  var newDiscovererPoints = parseInt(discoverer[0].points) + 10;
 
-                  db.users.update({googleId: discoveryFoundBy}, {$set: {confirms: newDiscovererConfirms, points: newDiscovererPoints}}, function(err, docs) {
-                    if(err) console.log(err);
-                    console.log(docs);
+          db.users.find({googleId: req.user.id}, function(err, foundUser) {
+
+              // if user isn't confirming more than once and isn't confirming his own discovery
+              if (foundUser[0].confirmedImages.indexOf(confirmedImage) < 0
+                  && foundUser[0].googleId != discoveryFoundBy
+                  && discoveryLatitudeAdd > userLatitude 
+                  && discoveryLatitudeSub < userLatitude
+                  && discoveryLongitudeAdd > userLongitude
+                  && discoveryLongitudeSub < userLongitude) {
+
+                  // new finds count and points for user
+                  var userFindCount = parseInt(foundUser[0].finds) + 1;
+                  var newPointsCount = parseInt(foundUser[0].points) + 10;
+
+                  // new confirms count for discovery
+                  var newConfirmCount = parseInt(req.body.modal.confirms) + 1;
+
+                  // adds image url to confirms array so that they can't confirm more than once
+                  db.users.update({googleId: req.user.id}, {$push: {confirmedImages: confirmedImage}}, function(err, docs) {
+                      if (err) console.log(err);
+                      console.log(docs);
                   });
 
-              });
-              
-              res.send("You found it! +10 points");
+                  // add points and find count to user that found discovery
+                  db.users.update({googleId: req.user.id}, {$set: {finds: userFindCount, points: newPointsCount}}, function(err, docs) {
+                      if (err) console.log(err);
+                      console.log(docs);
+                  });
 
-          } // end of if user is confirming own finds or trying to confirm more than once.
+                  // adds confirm count to discovery
+                  db.discoveries.update({image: confirmedImage}, {$set: {confirms: newConfirmCount}}, function(err, docs) {
+                      if (err) console.log(err);
+                      console.log(docs);
+                  });
 
-          else if (foundUser[0].googleId == discoveryFoundBy) {
-              console.log("You can't confirm your own discoveries!");
-              res.send("You can't confirm your own discoveries!");
+                  // adds points and confirm count to the discoverer
+                  db.users.find({googleId: discoveryFoundBy}, function(err, discoverer) {
+                      
+                      if (err) console.log(err);
+                      console.log(discoverer);
+                      
+                      // new confirm count and points for discoverer
+                      var newDiscovererConfirms = parseInt(discoverer[0].confirms) + 1;
+                      var newDiscovererPoints = parseInt(discoverer[0].points) + 10;
 
-          }
+                      db.users.update({googleId: discoveryFoundBy}, {$set: {confirms: newDiscovererConfirms, points: newDiscovererPoints}}, function(err, docs) {
+                        
+                        if(err) console.log(err);
+                        console.log(docs);
+                        
+                      });
 
-          else {
-              console.log("You have already confirmed this!");
-              res.send("You have already confirmed this!");
+                  });
+                  
+                  res.send("You found it! +10 points");
 
-          }
+              } // end of if user is confirming own finds or trying to confirm more than once.
 
-          
+              else if (discoveryLatitudeAdd < userLatitude 
+                  || discoveryLatitudeSub > userLatitude
+                  || discoveryLongitudeAdd < userLongitude
+                  || discoveryLongitudeSub > userLongitude) {
 
-      }); // end of db.users.findGoogleId
+                  console.log("You aren't close enough to find this discovery. Keep looking!")
+                  res.send("You aren't close enough to find this discovery. Keep looking!")
 
-    
+              }
+
+              else if (foundUser[0].googleId == discoveryFoundBy) {
+                  console.log("You can't confirm your own discoveries!");
+                  res.send("You can't confirm your own discoveries!");
+
+              }
+
+              else {
+                  console.log("You have already confirmed this!");
+                  res.send("You have already confirmed this!");
+
+              }
+
+          }); // end of db.users.findGoogleId
+
+      }); // end of db.discoveries.findimage
 
   }); // end of app.post confirm
 
