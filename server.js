@@ -52,8 +52,11 @@ var mongojs = require('mongojs');
 var databaseUrl = "discoverIt";
 var collections = ["users", "discoveries"];
 
+// MongoLab for deploying to heroku
+var db = mongojs(process.env.MONGODB_URI, ['users', 'discoveries']);
+
 // creates a databse in mongo called scrape with two collections: articles and comments
-var db = mongojs('discoverIt', ['users', 'discoveries']);
+// var db = mongojs('discoverIt', ['users', 'discoveries']);
 
 // lets us know if there is an error with the database if it doesn't turn on
 db.on('error', function(err) {
