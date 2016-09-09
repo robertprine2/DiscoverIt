@@ -123,11 +123,13 @@ h3 {
 .successMessage {
   color: green;
   font-weight: 5;
+  font-size: 25px;
 }
 
 .errorMessage {
   color: red;
   font-weight: 5;
+  font-size: 25px;
 }
 
 .modalImage {
