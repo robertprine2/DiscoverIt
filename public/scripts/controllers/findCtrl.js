@@ -67,12 +67,23 @@ angular.module('app')
 		      	  	  initMap(function(){
 			        	  $http.post('/confirm', {modal: $scope.discoveryData, latitude: latitude, longitude: longitude}).then(function(data) {
 				        	
-				        	  $scope.message = data.data;
+				        	  
+				        	  if (data.data.success){
+				        	  		console.log(data.data.success);
+				        	  		$scope.successMessage = data.data.success;
 
-			        		  $scope.show = true;
+				        	  		$scope.showSuccess = true;
+				        	  }
+				        	  else {
+
+					        	  $scope.errorMessage = data.data;
+
+				        		  $scope.show = true;
+				        	  }
 
 			        		  $timeout(function() {
-							      $scope.show = false
+							      $scope.show = false;
+							      $scope.showSuccess = false;
 							      $uibModalInstance.close();
 							  }, 3000);
 

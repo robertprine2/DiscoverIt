@@ -337,12 +337,12 @@ app.get('/main',
                         
                         if(err) console.log(err);
                         console.log(docs);
-                        
+
                       });
 
                   });
                   
-                  res.send("You found it! +10 points");
+                  res.send({success: "You found it! +10 points"});
 
               } // end of if user is confirming own finds or trying to confirm more than once.
 

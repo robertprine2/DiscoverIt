@@ -120,6 +120,30 @@ h3 {
   margin-bottom: 25px;
 }
 
+.successMessage {
+  color: green;
+  font-weight: 5;
+}
+
+.errorMessage {
+  color: red;
+  font-weight: 5;
+}
+
+.modalImage {
+  margin-bottom: 15px;
+}
+
+.fadein {
+    opacity: 1;
+    animation: fade 3s linear;
+}
+
+@keyframes fade {
+  0%,100% { opacity: 0 }
+  50% { opacity: 1 }
+}
+
 /*Discover It Page*/
 
 
