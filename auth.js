@@ -3,7 +3,7 @@ module.exports = {
 	'googleAuth' : {
 		'clientID' 		: '794016409691-23utaecc07q7fi18ef8uuhmfava3sjlr.apps.googleusercontent.com',
 		'clientSecret'	: 'ANzbUL9s1iRkaChfCTr4hvrk',
-		'callbackURL' 	: 'http://intense-reaches-75398.herokuapp.com/login/google/return',
+		'callbackURL' 	: 'https://intense-reaches-75398.herokuapp.com/login/google/return',
 		//'callbackURL' 	: 'http://localhost:3000/login/google/return', //http://localhost:8080/auth/google/callback
 	},
 
