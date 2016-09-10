@@ -175,7 +175,7 @@ app.get('/main',
       console.log(image);
       cloudinary.uploader.upload(image, function(result) { 
           console.log(result);
-          var imageUrl = result.url;
+          var imageUrl = result.secure_url;
       
           db.discoveries.insert({
             "user": req.user.displayName,

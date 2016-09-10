@@ -1,20 +1,21 @@
 <h1>{{title}}</h1>
 
+
 <form name="discoverForm" ng-submit="discoverForm.$valid && addDiscovery()" novalidate>
 
-	<script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>  
-              
-    <script type="text/javascript">  
+<div class="row">
+    <div class="col-xs-12">
 
-    </script>
+    <input ng-model="discovery.name" type="text" class="form-control input-lg" id="name" placeholder="What is the name of your discovery?" title="name" required />
 
-    <input ng-model="discovery.name" type="text" class="form-control" id="name" placeholder="What is the name of your discovery?" title="name" required />
+    </div>
+</div>
 
-    <select ng-model="discovery.objectType" class="form-control" id="objectType" ng-options="object for object in objects" title="objectType" required>
+    <select ng-model="discovery.objectType" class="form-control input-lg" id="objectType" ng-options="object for object in objects" title="objectType" required>
     	<option value="" disabled selected>Select what type of discovery you have found.</option>
     </select>
 
-    <textarea ng-model="discovery.description" class="form-control" placeholder="What does your discovery look/feel/smell like? Are there any other observations or knowledge you can share about it?" title="description" id="description" required></textarea>
+    <textarea ng-model="discovery.description" class="form-control input-lg" placeholder="What does your discovery look/feel/smell like? Are there any other observations or knowledge you can share about it?" title="description" id="description" required></textarea>
 
     <!--location found by gps TODO-->
 
@@ -22,7 +23,8 @@
     <input type="submit" class="btn btn-primary pull-right" value="Discover It!" />
     <h4>{{didItWork}}</h4>
 </form>
-
+    </div>
+</div>
 <div class="row">
 	<div class="col-md-12">
 
@@ -30,6 +32,12 @@
 
 	</div>
 </div>
+
+<script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>  
+              
+<script type="text/javascript">  
+
+</script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoY3tyaLpbkWArJ-UIWM2h33Q_KNO0N-U&callback=initMap"
     async defer></script>\
