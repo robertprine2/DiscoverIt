@@ -27,14 +27,12 @@
                 
                 <img class="modalImage" ng-src="{{discoveryData.image}}" style="height: 400px; width: 100%">
                 <p class="leftAlign">{{discoveryData.description}}</p> 
-            </div>
+                <h1 ng-model="message" ng-show="showSuccess" class="successMessage fadein">{{successMessage}}</h1>
+                <h1 ng-model="message" ng-show="show" class="errorMessage fadein">{{errorMessage}}</h1>
+
+            </div> 
 
             <div class="modal-footer">
-                
-                <div>
-                    <h1 ng-model="message" ng-show="showSuccess" class="successMessage fadein">{{successMessage}}</h1>
-                    <h1 ng-model="message" ng-show="show" class="errorMessage fadein">{{errorMessage}}</h1>
-                </div>
             
                     <p class="pull-left">Confirms: {{discoveryData.confirms}}</p>
                     <button class="btn btn-primary" type="button" ng-click="confirmDiscovery()">Found It!</button>

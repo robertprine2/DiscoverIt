@@ -36,9 +36,9 @@ angular.module('app')
 	        	
 	        	$http.post('/discover', {discovery: discovery}).then(function(data) {
 	        			console.log(data);
-			            $scope.showMessage = true;
+		            $scope.showMessage = true;
 
-                  $timeout(function() {
+                $timeout(function() {
                     $scope.showMessage = false;
                 }, 3000);
 			    });
