@@ -161,6 +161,18 @@ ul li {
 
 /*Discover It Page*/
 
+.ng-invalid.ng-dirty {
+  border: 2px solid red;
+  box-shadow: rgba(0,0,0,0.2) 0px 2px 3px, inset rgba(0,0,0,0.2) 0px -1px 2px;
+    border-radius: 20px;
+}
+
+.ng-valid.ng-dirty {
+  border: 2px solid green;
+  box-shadow: rgba(0,0,0,0.2) 0px 2px 3px, inset rgba(0,0,0,0.2) 0px -1px 2px;
+    border-radius: 20px;
+}
+
 .title {
   margin-bottom: 50px;
 }
