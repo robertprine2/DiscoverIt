@@ -90,8 +90,13 @@ h3 {
 
 .logo {
   width: 20%;
+  margin-top: 30px;
 }
 
+ul li {
+  margin-top: 20px;
+  font-size: 25px;
+}
 
 
 
@@ -156,6 +161,23 @@ h3 {
 
 /*Discover It Page*/
 
+.title {
+  margin-bottom: 50px;
+}
+
+.form-control {
+  margin-bottom: 50px;
+  font-size: 25px;
+}
+
+.btn-primary {
+  margin-bottom: 50px;
+  font-size: 25px;
+}
+
+.title {
+  margin-bottom: 50px;
+}
 
 /*googlemap*/
 
