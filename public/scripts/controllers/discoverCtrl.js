@@ -2,9 +2,9 @@ var latitude = 0;
 var longitude = 0;
 
 angular.module('app')
-	.controller('discoverCtrl', ['$scope', '$http', function($scope, $http, $log) {
+	.controller('discoverCtrl', ['$scope', '$http', function($scope, $http, $log, $timeout) {
         $scope.title = "Discover It!";
-        $scope.didItWork = "";
+        $scope.showMessage = false;
         $scope.objects = ['animal', 'art', 'food', 'landform', 'object', 'plant', 'pokemon', 'vehicle'];
 
         $scope.mapKey = "";
@@ -36,10 +36,10 @@ angular.module('app')
 	        	
 	        	$http.post('/discover', {discovery: discovery}).then(function(data) {
 	        			console.log(data);
-			            $scope.didItWork = "You discovered it! \n+10 points";
+			            $scope.showMessage = true;
 
                   $timeout(function() {
-                    $scope.didItWork = "";
+                    $scope.showMessage = false;
                 }, 3000);
 			    });
 
