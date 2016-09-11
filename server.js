@@ -175,7 +175,7 @@ app.get('/main',
       console.log(image);
 
       db.discoveries.find({ $and: [{user: req.user.displayName}, {name: req.body.discovery.name}, {description: req.body.discovery.description}, {objectType: req.body.discovery.objectType}]}, function(err, alreadyHere) {
-          console.log("already here: " + alreadyHere):
+          console.log("already here: " + alreadyHere);
           if (alreadyHere.length > 0) {
 
               cloudinary.uploader.upload(image, function(result) { 
