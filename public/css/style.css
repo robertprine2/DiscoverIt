@@ -182,8 +182,13 @@ ul li {
 }
 
 .form-control {
+  font-size: 25px;
+}
+
+.validation {
   margin-bottom: 50px;
   font-size: 25px;
+  color: red;
 }
 
 #description {
