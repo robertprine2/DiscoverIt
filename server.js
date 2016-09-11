@@ -173,47 +173,64 @@ app.get('/main',
 
       var image = req.body.discovery.image;
       console.log(image);
-      cloudinary.uploader.upload(image, function(result) { 
-          console.log(result);
-          var imageUrl = result.secure_url;
+
+      db.discoveries.find({ $and: [{user: req.user.displayName}, {name: req.body.discovery.name}, {description: req.body.discovery.description}, {objectType: req.body.discovery.objectType}]}, function(err, alreadyHere) {
+          console.log("already here: " + alreadyHere):
+          if (alreadyHere.length > 0) {
+
+              cloudinary.uploader.upload(image, function(result) { 
+                  console.log(result);
+                  var imageUrl = result.secure_url;
+              
+                  db.discoveries.insert({
+                    "user": req.user.displayName,
+                    "userId": req.user.id,
+                    "image": imageUrl,
+                    "name": req.body.discovery.name,
+                    "objectType": req.body.discovery.objectType,
+                    "description": req.body.discovery.description,
+                    "location": req.body.discovery.location,
+                    "discoveredOn": req.body.discovery.discoveredOn,
+                    "suggestedEdits": [],
+                    "confirms": 0
+                  }); //end of db.discoveries.insert
+
+              }); // end of cloudinary.uploader
+
+        //*********************************
+              //increase user discovery count
+        //**********************************
+              
+              db.users.find({googleId: req.user.id}, function(err, found) {
+                  console.dir(found);
+
+                  var newDiscoveryCount = parseInt(found[0].discoveries) + 1;
+                  console.log("discoveries: " + found[0].discoveries);
+
+                  var newPointsCount = parseInt(found[0].points) + 5; 
+                  console.log("points: " + found[0].points);
+                  
+                  db.users.update({googleId: req.user.id}, {$set: {discoveries: newDiscoveryCount, points: newPointsCount}}, function(err, docs) {
+                      if (err) console.log(err);
+                      console.log(docs);
+                  }); // end of update users points and discovery count
+
+              }); // db find user that submitted
+              
+
+              res.send({success: "You discovered it! +5 points"});
+
+          } // end of if already in the database
+
+          else {
+
+              res.send({error: "Ouch! Stop pressing the button so much! This discovery has already been submitted to the database."});
+
+          }
+
+      }); // end of db.find if already in database
+
       
-          db.discoveries.insert({
-            "user": req.user.displayName,
-            "userId": req.user.id,
-            "image": imageUrl,
-            "name": req.body.discovery.name,
-            "objectType": req.body.discovery.objectType,
-            "description": req.body.discovery.description,
-            "location": req.body.discovery.location,
-            "discoveredOn": req.body.discovery.discoveredOn,
-            "suggestedEdits": [],
-            "confirms": 0
-          }); //end of db.discoveries.insert
-
-      }); // end of cloudinary.uploader
-
-//*********************************
-      //increase user discovery count
-//**********************************
-      
-      db.users.find({googleId: req.user.id}, function(err, found) {
-          console.dir(found);
-
-          var newDiscoveryCount = parseInt(found[0].discoveries) + 1;
-          console.log("discoveries: " + found[0].discoveries);
-
-          var newPointsCount = parseInt(found[0].points) + 5; 
-          console.log("points: " + found[0].points);
-          
-          db.users.update({googleId: req.user.id}, {$set: {discoveries: newDiscoveryCount, points: newPointsCount}}, function(err, docs) {
-              if (err) console.log(err);
-              console.log(docs);
-          });
-
-      })
-      
-
-      res.send("You submitted your discovery to the database!");
 
   });
 

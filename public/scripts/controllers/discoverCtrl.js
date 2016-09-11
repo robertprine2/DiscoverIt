@@ -4,7 +4,10 @@ var longitude = 0;
 angular.module('app')
 	.controller('discoverCtrl', ['$scope', '$http', function($scope, $http, $log, $timeout) {
         $scope.title = "Discover It!";
-        $scope.showMessage = false;
+        $scope.showMessageSuccess = false;
+        $scope.showMessageError = false;
+        $scope.success = "";
+        $scope.error = "";
         $scope.objects = ['animal', 'art', 'food', 'landform', 'object', 'plant', 'pokemon', 'vehicle'];
 
         $scope.mapKey = "";
@@ -35,12 +38,35 @@ angular.module('app')
 	        	console.log(discovery);
 	        	
 	        	$http.post('/discover', {discovery: discovery}).then(function(data) {
-	        			console.log(data);
-		            $scope.showMessage = true;
+	        			
+                console.log(data);
+		            
+                if (data.data.success) {
+                    $scope.success = data.data.success;
 
-                $timeout(function() {
-                    $scope.showMessage = false;
-                }, 3000);
+                    $scope.showMessageSuccess = true;
+
+                    $timeout(function() {
+
+                        $scope.showMessageSuccess = false;
+                        
+                    }, 3000);
+                }
+
+                else {
+                    $scope.error = data.data.error;
+
+                    $scope.showMessageError = true;
+
+                    $timeout(function() {
+                        
+                        $scope.showMessageError = false;
+
+                    }, 3000);
+                }
+                
+
+                
 			    });
 
             });
