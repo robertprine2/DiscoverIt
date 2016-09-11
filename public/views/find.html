@@ -1,13 +1,15 @@
 <h1>{{title}}</h1>
 
-<h1 ng-model="message" ng-show="show" class="message fadein fadeout">{{message}}</h1>
 
-<input ng-model="searchName " type="text" id="searchDiscoveries" class="form-control" placeholder="What name would you like to search?" />
-
+<div class="row">
+    <div class="col-xs-12">
+        <input ng-model="searchName" type="text" id="searchDiscoveries" class="form-control input-lg" placeholder="What name would you like to search?" />
+    </div>
+</div>
 
 <div class="row">
     <div ng-repeat="discovery in discoveries | filter:searchName"> 
-    	<div class="col-sm-2 imgList">
+    	<div class="col-md-2 col-sm-3 col-xm-4 imgList">
     		<a ng-click="discoveryModal('lg', discovery)"><img ng-src={{discovery.image}} style="height: 150px; width: 100%"/></a>
     	</div>
     	<!-- <div class="col-md-4">
@@ -54,7 +56,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-xs-12">
 
 		<div id="map"></div>
 
