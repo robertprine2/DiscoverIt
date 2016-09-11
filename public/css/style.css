@@ -23,6 +23,7 @@ h1, h2, h3, h4, h5, h6, a, img {
 
 p {
   font-family: 'Cutive', serif;
+  font-size: 20px;
 }
 
 h3 {
@@ -147,6 +148,10 @@ ul li {
 
 .modalImage {
   margin-bottom: 15px;
+}
+
+.modalFindConfirms {
+  margin-top: 5px;
 }
 
 #foundIt {
