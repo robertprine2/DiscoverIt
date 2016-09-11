@@ -165,13 +165,13 @@ ul li {
   height: 55px;
 }
 
-.discoveryInput.ng-invalid.ng-dirty {
+.discoveryInput.ng-invalid {
   border: 2px solid red;
   box-shadow: rgba(0,0,0,0.2) 0px 2px 3px, inset rgba(0,0,0,0.2) 0px -1px 2px;
     border-radius: 20px;
 }
 
-.discoveryInput.ng-valid.ng-dirty {
+.discoveryInput.ng-valid {
   border: 2px solid green;
   box-shadow: rgba(0,0,0,0.2) 0px 2px 3px, inset rgba(0,0,0,0.2) 0px -1px 2px;
     border-radius: 20px;
