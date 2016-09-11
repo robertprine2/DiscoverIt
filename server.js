@@ -178,7 +178,7 @@ app.get('/main',
           console.log("already here: " + alreadyHere);
           console.log(alreadyHere);
           console.log(alreadyHere.length);
-          if (alreadyHere.length > 0) {
+          if (alreadyHere.length < 1) {
 
               cloudinary.uploader.upload(image, function(result) { 
                   console.log(result);
