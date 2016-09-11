@@ -149,6 +149,11 @@ ul li {
   margin-bottom: 15px;
 }
 
+#foundIt {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .fadein {
     opacity: 1;
     animation: fade 3s linear;
