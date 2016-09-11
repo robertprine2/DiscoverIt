@@ -6,22 +6,25 @@
     <div class="row">
         <div class="col-xs-12">
 
-        <input ng-model="discovery.name" type="text" class="form-control input-lg discoveryInput" id="name" placeholder="What is the name of your discovery?" title="name" required />
+            <input ng-model="discovery.name" type="text" class="form-control input-lg discoveryInput" name="name" id="name" placeholder="What is the name of your discovery?" title="name" required />
+            <span ng-show="discoverForm.name.$invalid">Don't forget the name!</span>
 
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
 
-            <select ng-model="discovery.objectType" class="form-control input-lg discoveryInput" id="objectType" ng-options="object for object in objects" title="objectType" required>
+            <select ng-model="discovery.objectType" class="form-control input-lg discoveryInput" name="objectType" id="objectType" ng-options="object for object in objects" title="objectType" required>
         	   <option value="" disabled selected>Select what type of discovery you have found.</option>
             </select>
+            <span ng-show="discoverForm.objectType.$invalid">What kind of discovery are you making?</span>
         </div>
     </div>
 
     <div class="row">
         <div class="col-xs-12">
             <textarea ng-model="discovery.description" class="form-control input-lg discoveryInput" placeholder="What does your discovery look/feel/smell like? Are there any other observations or knowledge you can share about it?" title="description" id="description" required></textarea>
+            <span ng-show="discoverForm.description.$invalid">Make some observations about your discovery!</span>
         </div>
     </div>
         
