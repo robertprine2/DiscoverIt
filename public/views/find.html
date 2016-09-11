@@ -31,14 +31,17 @@
 
             <div class="modal-footer">
                 <div class="row">
-                    <h1 ng-model="message" ng-show="showSuccess" class="successMessage fadein">{{successMessage}}</h1>
-                    <h1 ng-model="message" ng-show="show" class="errorMessage fadein">{{errorMessage}}</h1>
+                    <div class="col-xs-12">
+                        <h1 ng-model="message" ng-show="showSuccess" class="successMessage fadein">{{successMessage}}</h1>
+                        <h1 ng-model="message" ng-show="show" class="errorMessage fadein">{{errorMessage}}</h1>
+                    </div>
                 </div>
                 <div class="row">
-                    <p class="pull-left">Confirms: {{discoveryData.confirms}}</p>
-                    <button class="btn btn-primary" type="button" ng-click="confirmDiscovery()">Found It!</button>
-
-                <!-- <button class="btn btn-warning" ng-click="suggestEdit()">Suggest Edit</button> -->
+                    <div class="col-xs-12">
+                        <p class="pull-left">Confirms: {{discoveryData.confirms}}</p>
+                        <button class="btn btn-primary" type="button" ng-click="confirmDiscovery()">Found It!</button>
+                        <!-- <button class="btn btn-warning" ng-click="suggestEdit()">Suggest Edit</button> -->
+                    </div>
                 </div>
             </div>
 
