@@ -36,7 +36,11 @@ angular.module('app')
 	        	
 	        	$http.post('/discover', {discovery: discovery}).then(function(data) {
 	        			console.log(data);
-			            $scope.didItWork = "You discovered it!";
+			            $scope.didItWork = "You discovered it! \n+10 points";
+
+                  $timeout(function() {
+                    $scope.didItWork = "";
+                }, 3000);
 			    });
 
             });
