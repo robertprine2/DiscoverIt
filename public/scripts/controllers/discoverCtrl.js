@@ -67,7 +67,11 @@ angular.module('app')
                         }, 3000);
                     }
                     
+                  $scope.discovery.name = "";
 
+                  $scope.discovery.objectType = "";
+
+                  $scope.discovery.description = "";
                     
     			    }); //http.post
 
