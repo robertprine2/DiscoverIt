@@ -179,7 +179,15 @@ ul li {
   height: 55px;
 }
 
-.discoveryInput.ng-invalid {
+.discoveryInput.ng-invalid.ng-dirty {
+  border: 2px solid red;
+  box-shadow: rgba(0,0,0,0.2) 0px 2px 3px, inset rgba(0,0,0,0.2) 0px -1px 2px;
+    border-radius: 20px;
+}
+
+/* if they can somehow submit the form without filling in fields*/
+form.submitted .ng-invalid
+{
   border: 2px solid red;
   box-shadow: rgba(0,0,0,0.2) 0px 2px 3px, inset rgba(0,0,0,0.2) 0px -1px 2px;
     border-radius: 20px;
