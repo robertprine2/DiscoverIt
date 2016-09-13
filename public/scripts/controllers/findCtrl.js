@@ -66,8 +66,7 @@ angular.module('app')
 
 		      	  	  initMap(function(){
 			        	  $http.post('/confirm', {modal: $scope.discoveryData, latitude: latitude, longitude: longitude}).then(function(data) {
-				        	
-				        	  
+				        	 
 				        	  if (data.data.success){
 				        	  		console.log(data.data.success);
 				        	  		$scope.successMessage = data.data.success;
@@ -89,7 +88,8 @@ angular.module('app')
 
 			        		  console.log(data);
 			        		  
-
+			        		  $scope.closeModal = function() {$uibModalInstance.close();
+				        	  };
 			        		  
 				          });
 		      	  	  });

@@ -150,6 +150,10 @@ ul li {
   margin-bottom: 15px;
 }
 
+#closeModal {
+  font-size: 40px;
+}
+
 .modal-title {
   text-align: right;
 }
