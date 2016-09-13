@@ -62,6 +62,10 @@ angular.module('app')
 		      controller: function ($scope, $uibModalInstance, discoveryData) {
 		      	  $scope.discoveryData = discoveryData;
 		      	  
+		      	  $scope.closeModal = function() {
+		      	  		$uibModalInstance.close();
+				  };
+
 		      	  $scope.confirmDiscovery = function() {
 
 		      	  	  initMap(function(){
@@ -87,10 +91,7 @@ angular.module('app')
 							  }, 3000);
 
 			        		  console.log(data);
-			        		  
-			        		  $scope.closeModal = function() {$uibModalInstance.close();
-				        	  };
-			        		  
+			        		 			        		  			        		  
 				          });
 		      	  	  });
 		          };
