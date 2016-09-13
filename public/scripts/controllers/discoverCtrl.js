@@ -9,10 +9,10 @@ angular.module('app')
         $scope.success = "";
         $scope.error = "";
         $scope.objects = ['animal', 'art', 'food', 'landform', 'object', 'plant', 'pokemon', 'vehicle'];
-
+        var discovery = {};
         $scope.mapKey = "";
         $scope.discovery.name="";
-        
+
 
         $scope.addDiscovery = function() {
         	
@@ -25,8 +25,6 @@ angular.module('app')
                 str = $('#objectType').val();
                 
                 initMap();
-
-                var discovery = {};
         
                 discovery.name = $('#name').val();
                 discovery.objectType = str.substring(7, str.length);
