@@ -2,7 +2,7 @@ var latitude = 0;
 var longitude = 0;
 
 angular.module('app')
-	.controller('discoverCtrl', ['$scope', '$http', function($scope, $http, $log, $timeout) {
+	.controller('discoverCtrl', ['$scope', '$http', '$log', '$timeout' function($scope, $http, $log, $timeout) {
         $scope.title = "Discover It!";
         $scope.showMessageSuccess = false;
         $scope.showMessageError = false;

@@ -152,6 +152,7 @@ ul li {
 
 #closeModal {
   font-size: 40px;
+  cursor: pointer;
 }
 
 .modal-title {
