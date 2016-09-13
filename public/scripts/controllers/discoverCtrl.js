@@ -12,6 +12,8 @@ angular.module('app')
         $scope.discovery = {};
         $scope.mapKey = "";
         $scope.discovery.name="";
+        $scope.discovery.objectType=;
+        $scope.discovery.description = "";
 
 
         $scope.addDiscovery = function() {
@@ -26,50 +28,50 @@ angular.module('app')
                 
                 initMap();
         
-                discovery.name = $('#name').val();
-                discovery.objectType = str.substring(7, str.length);
-                discovery.description = $('#description').val();
-	        	discovery.image = imageUrl;
-	        	discovery.location = {
+                //$scope.discovery.name = $('#name').val();
+                $scope.discovery.objectType = str.substring(7, str.length);
+                //discovery.description = $('#description').val();
+    	        	$scope.discovery.image = imageUrl;
+    	        	$scope.discovery.location = {
                     lat: latitude,
                     lng: longitude
                 }/*gps api call*/;
-	        	discovery.discoveredOn = Date.now();
-	        	console.log(discovery);
+    	        	$scope.discovery.discoveredOn = Date.now();
+    	        	console.log($scope.discovery);
 	        	
-	        	$http.post('/discover', {discovery: discovery}).then(function(data) {
-	        			
-                console.log(data);
-		            
-                if (data.data.success) {
-                    $scope.success = data.data.success;
+    	        	$http.post('/discover', {discovery: $scope.discovery}).then(function(data) {
+    	        			
+                    console.log(data);
+    		            
+                    if (data.data.success) {
+                        $scope.success = data.data.success;
 
-                    $scope.showMessageSuccess = true;
+                        $scope.showMessageSuccess = true;
 
-                    $timeout(function() {
+                        $timeout(function() {
 
-                        $scope.showMessageSuccess = false;
-                        
-                    }, 3000);
-                }
+                            $scope.showMessageSuccess = false;
+                            
+                        }, 3000);
+                    }
 
-                else {
-                    $scope.error = data.data.error;
+                    else {
+                        $scope.error = data.data.error;
 
-                    $scope.showMessageError = true;
+                        $scope.showMessageError = true;
 
-                    $timeout(function() {
-                        
-                        $scope.showMessageError = false;
+                        $timeout(function() {
+                            
+                            $scope.showMessageError = false;
 
-                    }, 3000);
-                }
-                
+                        }, 3000);
+                    }
+                    
 
-                
-			    });
+                    
+    			    }); //http.post
 
-            });
+            }); //cloudinary call
 
 
 
