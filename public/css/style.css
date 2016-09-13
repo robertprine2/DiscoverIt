@@ -153,10 +153,12 @@ ul li {
 #closeModal {
   font-size: 40px;
   cursor: pointer;
+  float: right;
 }
 
 .modal-title {
   text-align: right;
+  clear: both;
 }
 
 .modalFindConfirms {
