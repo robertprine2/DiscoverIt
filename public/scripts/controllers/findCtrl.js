@@ -120,7 +120,7 @@ angular.module('app')
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 28.5383, lng: -81.3792},
           scrollwheel: false,
-          zoom: 15
+          zoom: 10
         });
         var infoWindow = new google.maps.InfoWindow({map: map});
 
