@@ -12,7 +12,7 @@ angular.module('app')
         $scope.discovery = {};
         $scope.mapKey = "";
         $scope.discovery.name="";
-        $scope.discovery.objectType=;
+        $scope.discovery.objectType="";
         $scope.discovery.description = "";
 
 
