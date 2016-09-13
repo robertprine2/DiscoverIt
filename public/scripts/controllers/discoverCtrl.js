@@ -9,7 +9,7 @@ angular.module('app')
         $scope.success = "";
         $scope.error = "";
         $scope.objects = ['animal', 'art', 'food', 'landform', 'object', 'plant', 'pokemon', 'vehicle'];
-        var discovery = {};
+        $scope.discovery = {};
         $scope.mapKey = "";
         $scope.discovery.name="";
 
