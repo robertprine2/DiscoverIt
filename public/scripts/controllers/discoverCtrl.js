@@ -72,6 +72,8 @@ angular.module('app')
                   $scope.discovery.objectType = "";
 
                   $scope.discovery.description = "";
+
+                  discoverForm.$setPristine();
                     
     			    }); //http.post
 
