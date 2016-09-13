@@ -11,6 +11,8 @@ angular.module('app')
         $scope.objects = ['animal', 'art', 'food', 'landform', 'object', 'plant', 'pokemon', 'vehicle'];
 
         $scope.mapKey = "";
+        $scope.discovery.name="";
+        
 
         $scope.addDiscovery = function() {
         	
@@ -71,7 +73,9 @@ angular.module('app')
 
             });
 
-        };
+
+
+        }; // add discovery function
 
         $scope.updateMap = function() {
 
