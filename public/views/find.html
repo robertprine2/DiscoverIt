@@ -10,7 +10,7 @@
 <div class="row">
     <div ng-repeat="discovery in discoveries | filter:searchName"> 
     	<div class="col-md-2 col-sm-3 col-xm-4 imgList">
-    		<a ng-click="discoveryModal('lg', discovery)"><img ng-src={{discovery.image}} style="height: 150px; width: 100%"/></a>
+    		<a ng-click="discoveryModal('lg', discovery)"><img ng-src={{discovery.image}} class="imgLinkModal" style="height: 150px; width: 100%"/></a>
     	</div>
     	
     	<script type="text/ng-template" id="findItModal.html">

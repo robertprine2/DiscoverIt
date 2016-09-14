@@ -17,11 +17,11 @@ body {
   display: block;
 }
 
-h1, h2, h3, h4, h5, h6, a, img {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Open Sans', sans-serif;
 }
 
-p {
+p, a {
   font-family: 'Cutive', serif;
   font-size: 20px;
 }
@@ -125,6 +125,10 @@ ul li {
 }
 
 /*Find It Page*/
+
+.imgLinkModal {
+  border-radius: 30px;
+}
 
 #searchDiscoveries {
   margin-bottom: 25px;
