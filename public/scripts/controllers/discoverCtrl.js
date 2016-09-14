@@ -18,70 +18,68 @@ angular.module('app')
 
         $scope.addDiscovery = function() {
 
-          initMap();
+          initMap(function(){
         	
-        	cloudinary.openUploadWidget({ cloud_name: 'dfsidsh0y', upload_preset: 'exy3o3ab'}, 
-            function(error, result) { 
-                
-                var imageUrl = result[0].secure_url;
-                
-                // helps to removes "string:" in front of value
-                str = $('#objectType').val();
-                
-                initMap();
-        
-                //$scope.discovery.name = $('#name').val();
-                $scope.discovery.objectType = str.substring(7, str.length);
-                //discovery.description = $('#description').val();
-    	        	$scope.discovery.image = imageUrl;
-    	        	$scope.discovery.location = {
-                    lat: latitude,
-                    lng: longitude
-                }/*gps api call*/;
-    	        	$scope.discovery.discoveredOn = Date.now();
-    	        	console.log($scope.discovery);
-	        	
-    	        	$http.post('/discover', {discovery: $scope.discovery}).then(function(data) {
-    	        			
-                    console.log(data);
-    		            
-                    if (data.data.success) {
-                        $scope.success = data.data.success;
-
-                        $scope.showMessageSuccess = true;
-
-                        $timeout(function() {
-
-                            $scope.showMessageSuccess = false;
-                            
-                        }, 3000);
-                    }
-
-                    else {
-                        $scope.error = data.data.error;
-
-                        $scope.showMessageError = true;
-
-                        $timeout(function() {
-                            
-                            $scope.showMessageError = false;
-
-                        }, 3000);
-                    }
+            	cloudinary.openUploadWidget({ cloud_name: 'dfsidsh0y', upload_preset: 'exy3o3ab'}, 
+                function(error, result) { 
                     
-                  $scope.discovery.name = "";
-
-                  $scope.discovery.objectType = "";
-
-                  $scope.discovery.description = "";
-
-                  $scope.discoverForm.$setPristine();
+                    var imageUrl = result[0].secure_url;
                     
-    			    }); //http.post
+                    // helps to removes "string:" in front of value
+                    str = $('#objectType').val();
+            
+                    //$scope.discovery.name = $('#name').val();
+                    $scope.discovery.objectType = str.substring(7, str.length);
+                    //discovery.description = $('#description').val();
+        	        	$scope.discovery.image = imageUrl;
+        	        	$scope.discovery.location = {
+                        lat: latitude,
+                        lng: longitude
+                    }/*gps api call*/;
+        	        	$scope.discovery.discoveredOn = Date.now();
+        	        	console.log($scope.discovery);
+    	        	
+        	        	$http.post('/discover', {discovery: $scope.discovery}).then(function(data) {
+        	        			
+                        console.log(data);
+        		            
+                        if (data.data.success) {
+                            $scope.success = data.data.success;
 
-            }); //cloudinary call
+                            $scope.showMessageSuccess = true;
 
+                            $timeout(function() {
 
+                                $scope.showMessageSuccess = false;
+                                
+                            }, 3000);
+                        }
+
+                        else {
+                            $scope.error = data.data.error;
+
+                            $scope.showMessageError = true;
+
+                            $timeout(function() {
+                                
+                                $scope.showMessageError = false;
+
+                            }, 3000);
+                        }
+                        
+                      $scope.discovery.name = "";
+
+                      $scope.discovery.objectType = "";
+
+                      $scope.discovery.description = "";
+
+                      $scope.discoverForm.$setPristine();
+                        
+        			    }); //http.post
+
+                }); //cloudinary call
+
+            }); // end of callback
 
         }; // add discovery function
 
@@ -96,7 +94,7 @@ angular.module('app')
         
 	}]);
 
-    function initMap() {
+    function initMap(callback) {
         console.log("I'm initing a google map!");
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 28.5383, lng: -81.3792},
@@ -127,7 +125,9 @@ angular.module('app')
           handleLocationError(false, infoWindow, map.getCenter());
         }
       }
-
+      if (callback){
+              callback()
+      }
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
