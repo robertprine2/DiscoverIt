@@ -124,10 +124,12 @@ angular.module('app')
           // Browser doesn't support Geolocation
           handleLocationError(false, infoWindow, map.getCenter());
         }
-      }
-      if (callback){
+      
+         if (callback){
               callback()
+         }
       }
+      
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
