@@ -131,6 +131,7 @@ angular.module('app')
       
          
       }
+    }
       
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
