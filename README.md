@@ -1,10 +1,10 @@
-# DiscoverIt
+# Discover It!
 
 Discover It! is an app that promotes exploration and discovery. It is a great way to stay fit, build vocabulary, and learn about the world around you. 
 
 Make discoveries by taking pictures of interesting things you find and describing them. You can also find discoveries that others have made and confirm their existence. Go and Discover It!
 
-Getting Started
+# Getting Started
 
 	Log In:
 	1. Go to https://intense-reaches-75398.herokuapp.com/
@@ -50,12 +50,12 @@ Getting Started
 		3. Click "Found It!" button
 		4. Rejoice in your confirmation of someone else’s discovery
 
-Prerequisites
+# Prerequisites
 
 	Google account
 	Internet Browser (preferably Chrome on your phone for access to a camera and mobility)
 
-Built With
+# Built With
 
 	AngularJS
 	Node.js
@@ -65,15 +65,15 @@ Built With
 	MongoDB through mLab
 	Deployed through Heroku
 
-Author
+# Author
 
 	Robert Prine
 
-Lisence
+# Lisence
 
 	This project is licensed under the Robert Prine Made This Lisence.
 
-Acknowledgements
+# Acknowledgements
 
 	My daughter, Emma, for inspiring me with her limitless questions.
 
