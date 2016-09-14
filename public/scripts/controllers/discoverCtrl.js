@@ -97,11 +97,11 @@ angular.module('app')
 	}]);
 
     function initMap() {
-        console.log("I'm initing a google map!");
+        
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 28.5383, lng: -81.3792},
           scrollwheel: false,
-          zoom: 15
+          zoom: 1
         });
         var infoWindow = new google.maps.InfoWindow({map: map});
 
