@@ -18,6 +18,8 @@ angular.module('app')
 
         $scope.addDiscovery = function() {
 
+          $('.btn-primary').addClass("disabled");
+
           initMap();
         	
         	cloudinary.openUploadWidget({ cloud_name: 'dfsidsh0y', upload_preset: 'exy3o3ab'}, 
