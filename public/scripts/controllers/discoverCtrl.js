@@ -8,7 +8,7 @@ angular.module('app')
         $scope.showMessageError = false;
         $scope.success = "";
         $scope.error = "";
-        $scope.objects = ['animal', 'art', 'food', 'landform', 'object', 'plant', 'pokemon', 'vehicle'];
+        $scope.objects = ['animal', 'art', 'food', 'landform', 'object', 'person', 'place', 'plant', 'pokemon', 'vehicle'];
         $scope.discovery = {};
         $scope.mapKey = "";
         $scope.discovery.name="";
