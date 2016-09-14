@@ -117,6 +117,10 @@ angular.module('app')
             infoWindow.setPosition(pos);
             infoWindow.setContent('You are here!');
             map.setCenter(pos);
+
+            if (callback){
+              callback()
+            }
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
@@ -125,9 +129,7 @@ angular.module('app')
           handleLocationError(false, infoWindow, map.getCenter());
         }
       
-         if (callback){
-              callback()
-         }
+         
       }
       
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
