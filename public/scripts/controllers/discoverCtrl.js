@@ -17,6 +17,8 @@ angular.module('app')
 
 
         $scope.addDiscovery = function() {
+
+          initMap();
         	
         	cloudinary.openUploadWidget({ cloud_name: 'dfsidsh0y', upload_preset: 'exy3o3ab'}, 
             function(error, result) { 
